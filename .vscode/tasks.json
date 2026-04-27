@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar com Raylib",
+            "type": "shell",
+            "command": "C:/msys64/ucrt64/bin/gcc.exe",
+            "args": [
+                "src/main.c",
+                "-o",
+                "main.exe",
+                "-I",
+                "C:/raylib/include",
+                "-L",
+                "C:/raylib/lib",
+                "-lraylib",
+                "-lopengl32",
+                "-lgdi32",
+                "-lwinmm",
+                "-lcomdlg32"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "Compilar e Rodar",
+            "type": "shell",
+            "command": "C:/msys64/ucrt64/bin/gcc.exe main.c -o main.exe -IC:/raylib/include -LC:/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm -lcomdlg32 && .\\main.exe",
+            "group": "build",
+            "problemMatcher": "$gcc"
+        }
+    ]
+}
