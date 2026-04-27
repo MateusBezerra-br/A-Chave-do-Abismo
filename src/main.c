@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "Player.h"
 
 int main(void) {
 
@@ -8,17 +9,24 @@ int main(void) {
     // Trava em 60 quadros por segundo
     SetTargetFPS(60);
 
-    // Loop principal: roda ate fechar a janela ou pressionar ESC
+     Player player;
+    InitPlayer(&player);
+    
+
     while (!WindowShouldClose()) {
+
+        void InitPlayer(Player *p);
+
+        UpdatePlayer(&player);
 
         BeginDrawing();
 
-            ClearBackground(BLACK);
+            ClearBackground(WHITE);
 
-            DrawText("Raylib funcionando!", 400, 350, 36, YELLOW);
-            DrawText("Pressione ESC para fechar", 400, 310, 18, LIGHTGRAY);
+            DrawPlayer(&player);
+            
 
-            // Mostra o FPS no canto superior esquerdo
+            
             DrawFPS(10, 10);
 
         EndDrawing();
