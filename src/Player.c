@@ -2,10 +2,10 @@
 #include "Player.h"
 
 void InitPlayer(Player *p){
-    p->x = 600;
-    p->y = 400;
-    p->veloc = 200;
-    p->raio= 15;
+    p->x = 784;
+    p->y = 784;
+    p->veloc = 100;
+    p->raio= 5;
 }
 
 void UpdatePlayer(Player *p){

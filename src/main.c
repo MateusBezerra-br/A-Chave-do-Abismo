@@ -1,13 +1,16 @@
 #include "raylib.h"
 #include "Player.h"
+#include "Mapa.h"
+
 
 int main(void) {
 
-    // Abre a janela com titulo e tamanho
-    InitWindow(1100, 700, "A Chave do Abismo — Raylib funcionando!");
+    
+    InitWindow(1300, 1000, "A Chave do Abismo");
+     SetTargetFPS(60);
+    
+    carregar_mapa();
 
-    // Trava em 60 quadros por segundo
-    SetTargetFPS(60);
 
      Player player;
     InitPlayer(&player);
@@ -20,19 +23,20 @@ int main(void) {
         UpdatePlayer(&player);
 
         BeginDrawing();
-
-            ClearBackground(WHITE);
+            
+            ClearBackground(BLACK);
+            
+            desenhar_mapa();
 
             DrawPlayer(&player);
             
 
-            
             DrawFPS(10, 10);
 
         EndDrawing();
     }
 
-    // Fecha a janela e libera recursos
+    descarregar_mapa();
     CloseWindow();
 
     return 0;
