@@ -15,7 +15,7 @@ int main(void) {
      Player player;
     InitPlayer(&player);
     
-    Camera2D camera = {0};
+    
 
 Camera2D camera = {0};
 
@@ -29,7 +29,7 @@ InitCamera(&camera, &player);
 
         UpdatePlayer(&player);
 
-        UpdateCamera(&camera, &player);
+        AtualizarCamera(&camera, &player);
 
         BeginDrawing();
 

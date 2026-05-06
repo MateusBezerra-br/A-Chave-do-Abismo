@@ -11,7 +11,7 @@ void InitCamera(Camera2D *camera, Player *player) {
     camera->zoom = 1.0f;
 }
 
-void UpdateCamera(Camera2D *camera, Player *player) {
+void AtualizarCamera(Camera2D *camera, Player *player) {
 
     camera->target = (Vector2){player->x, player->y};
 }
