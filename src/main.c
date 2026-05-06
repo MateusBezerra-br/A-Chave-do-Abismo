@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include "Player.h"
 #include "Mapa.h"
-
+#include "Camera.h"
 
 int main(void) {
 
@@ -15,14 +15,27 @@ int main(void) {
      Player player;
     InitPlayer(&player);
     
+    Camera2D camera = {0};
+
+Camera2D camera = {0};
+
+InitCamera(&camera, &player);
+
 
     while (!WindowShouldClose()) {
+
 
         void InitPlayer(Player *p);
 
         UpdatePlayer(&player);
 
+        UpdateCamera(&camera, &player);
+
         BeginDrawing();
+
+        BeginMode2D(camera);
+
+        camera.target = (Vector2){player.x, player.y};
             
             ClearBackground(BLACK);
             
@@ -30,8 +43,11 @@ int main(void) {
 
             DrawPlayer(&player);
             
+             EndMode2D();
 
             DrawFPS(10, 10);
+
+           
 
         EndDrawing();
     }
