@@ -25,19 +25,18 @@ InitCamera(&camera, &player);
     while (!WindowShouldClose()) {
 
 
-        void InitPlayer(Player *p);
-
         UpdatePlayer(&player);
 
         AtualizarCamera(&camera, &player);
 
         BeginDrawing();
 
+        ClearBackground(BLACK);
+        
         BeginMode2D(camera);
 
-        camera.target = (Vector2){player.x, player.y};
             
-            ClearBackground(BLACK);
+            camera.target = (Vector2){player.x, player.y};
             
             desenhar_mapa();
 

@@ -4,8 +4,8 @@
 
 typedef struct {
 
-    int x;
-    int y;
+    float x;
+    float y;
     
     int veloc;
     
@@ -18,5 +18,8 @@ void InitPlayer(Player *p);
 void UpdatePlayer(Player *p);
 
 void DrawPlayer(Player *p);
+
+int Colisaoparede(float x, float y, float raio);
+
 
 #endif  

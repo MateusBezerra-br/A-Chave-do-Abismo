@@ -172,11 +172,13 @@ void desenhar_mapa() {
 int get_tile(int linha, int coluna){
     if(linha < 0 || linha >= LINHA || coluna < 0 || coluna >= COLUNA)
         return ID_PAREDE;
-        return mapa[LINHA][COLUNA];
+        return mapa[linha][coluna];
     
 
 }
 
 int is_parede(int linha, int coluna) {
-    return get_tile(linha, coluna) == ID_PAREDE;
+        int tile = get_tile(linha, coluna);
+        return get_tile(linha, coluna) == ID_PAREDE || tile == 305;
+
 }
