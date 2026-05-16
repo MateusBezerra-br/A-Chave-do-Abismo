@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Mapa.h"
 #include "Camera.h"
+#include "Ball.h"
 
 int main(void) {
 
@@ -21,9 +22,17 @@ Camera2D camera = {0};
 
 InitCamera(&camera, &player);
 
+Ball balls[1];
+
+InitBall(&balls[0], player.x + 30, player.y, 0, 0); 
+
+
 
     while (!WindowShouldClose()) {
 
+        for (int i = 0; i < 1; i++) {
+            UpdateBall(&balls[i]);
+        }
 
         UpdatePlayer(&player);
 
@@ -39,6 +48,10 @@ InitCamera(&camera, &player);
             camera.target = (Vector2){player.x, player.y};
             
             desenhar_mapa();
+
+              for (int i = 0; i < 1; i++) {
+            DrawBall(&balls[i]);
+        }
 
             DrawPlayer(&player);
             
