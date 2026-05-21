@@ -24,7 +24,7 @@ InitCamera(&camera, &player);
 
 Ball balls[1];
 
-InitBall(&balls[0], player.x + 30, player.y, 0, 0); 
+InitBall(&balls[0], 784, 784, 0, 0); 
 
 
 
