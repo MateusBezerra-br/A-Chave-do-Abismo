@@ -18,6 +18,8 @@
 
 extern int mapa[100][100];
 
+Texture2D get_dungeon_tileset();
+
 void carregar_mapa();
 
 void desenhar_mapa();

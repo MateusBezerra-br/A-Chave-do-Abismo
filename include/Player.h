@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Bau.h"
+#include "Porta.h"
 
 typedef struct {
 

@@ -1,11 +1,13 @@
 #include "raylib.h"
 #include "Player.h"
 #include "Mapa.h"
+#include "Bau.h"
+#include "Porta.h"
 
 
 void InitPlayer(Player *p){
-    p->x = 784;
-    p->y = 784;
+    p->x = 799;
+    p->y = 810;
     p->veloc = 100;
     p->raio= 5;
 }
@@ -25,11 +27,19 @@ void InitPlayer(Player *p){
         return 0;
  }
 
+  static int colide_objeto(float x, float y, float raio, float ox, float oy, float ow, float oh){
+    Rectangle rect = {ox, oy, ow, oh};
+    return CheckCollisionCircleRec((Vector2){x, y}, raio, rect);
+  }
+
 void UpdatePlayer(Player *p){
 
     float dt = GetFrameTime();
     float novo_x = p->x;
     float novo_y = p->y;
+    float static antigo_x;
+    float static antigo_y;
+
 
     if(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
         novo_x += p->veloc * dt;
@@ -43,12 +53,32 @@ void UpdatePlayer(Player *p){
     if(IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) { 
         novo_y += p->veloc * dt;
     }
+
+
     if(!Colisaoparede(novo_x, p->y, p->raio)){
         p->x = novo_x;
     }
     if(!Colisaoparede(p->x, novo_y, p->raio)){
         p->y = novo_y;
     }
+
+    
+    
+    if(colide_objeto(p->x, p->y, p->raio, bau.x, bau.y, 16, 16)) {
+        
+        p->x -= (novo_x - antigo_x);
+        p->y -= (novo_y - antigo_y);
+    }
+    if(colide_objeto(p->x, p->y, p->raio, porta.x, porta.y - 16, 16, 32)) {
+        p->x -= (novo_x - antigo_x);
+        p->y -= (novo_y - antigo_y);
+    }
+    else{
+     antigo_x = p -> x;
+     antigo_y = p -> y;
+    }
+
+
 
 }
 

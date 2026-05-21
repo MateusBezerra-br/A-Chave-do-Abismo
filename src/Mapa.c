@@ -145,6 +145,10 @@ static Rectangle get_origem(int id){
 
 }
 
+Texture2D get_dungeon_tileset(){
+        return ts_dungeon;
+}
+
 void desenhar_mapa() {
 
         for(int i= 0; i < LINHA; i++ ) {
