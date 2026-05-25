@@ -22,15 +22,18 @@ Camera2D camera = {0};
 
 InitCamera(&camera, &player);
 
-Ball balls[1];
+Ball balls[4];
 
-InitBall(&balls[0], 784, 784, 0, 0); 
+InitBall(&balls[0], 156, 1481, 150, 0); 
+InitBall(&balls[1], 1477, 1230, 0, 150); 
+InitBall(&balls[2], 1187, 109, -150, 0); 
+InitBall(&balls[3], 767, 250, 0, -150); 
 
 
 
     while (!WindowShouldClose()) {
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 4; i++) {
             UpdateBall(&balls[i]);
         }
 
@@ -49,13 +52,15 @@ InitBall(&balls[0], 784, 784, 0, 0);
             
             desenhar_mapa();
 
-              for (int i = 0; i < 1; i++) {
+              for (int i = 0; i < 4; i++) {
             DrawBall(&balls[i]);
         }
 
             DrawPlayer(&player);
             
              EndMode2D();
+             
+             
 
             DrawFPS(10, 10);
 

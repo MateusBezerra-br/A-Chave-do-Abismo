@@ -1,4 +1,7 @@
 #include "Ball.h"
+#include "Ball.h"
+#include "Player.h"
+#include <stdio.h>
 
 void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
 {
@@ -13,9 +16,34 @@ void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
 
 void UpdateBall(Ball *ball)
 {
-    ball->position.x += ball->speed.x;
+    
 
-    ball->position.y += ball->speed.y;
+    float dt = GetFrameTime();
+
+    float novo_x = ball->position.x + ball->speed.x * dt;
+    float novo_y = ball->position.y + ball->speed.y * dt;
+
+    
+
+    
+
+    if(!Colisaoparede(novo_x, ball->position.y, ball->radius))
+    {
+        ball->position.x = novo_x;
+    }
+    else
+    {
+        ball->speed.x *= -1;
+    }
+
+    if(!Colisaoparede(ball->position.x, novo_y, ball->radius))
+    {
+        ball->position.y = novo_y;
+    }
+    else
+    {
+        ball->speed.y *= -1;
+    }
 }
 
 void DrawBall(Ball *ball)
