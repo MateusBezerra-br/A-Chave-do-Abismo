@@ -4,10 +4,20 @@
 #include "Camera.h"
 #include "Bau.h"
 #include "Porta.h"
-
+#include "Papeis.h"
 
  int todos_coletados(){
-        return 0;
+     int i;
+    for(i=0 ; i < 4; i++){
+       
+        if(papeis[i].coletado == 1){
+      
+      return 0;
+     }
+
+    }
+
+    return 1;
     };
     
 int main(void) {
@@ -23,12 +33,16 @@ int main(void) {
      Player player;
     InitPlayer(&player);
     
+    
     InitBau();
     int tem_chave = 0;
     int vidas = 3;
     int venceu= 0;
+    
+    
 
     InitPorta();
+    InitPapeis();
 
 Camera2D camera = {0};
 
@@ -43,10 +57,12 @@ InitCamera(&camera, &player);
 
         if(!esta_na_charada())
             UpdatePlayer(&player);
+           Verificar_papel(player.x, player.y);
 
         BeginDrawing();
 
         ClearBackground(BLACK);
+        
         
 
         BeginMode2D(camera);
@@ -59,8 +75,17 @@ InitCamera(&camera, &player);
             DrawPlayer(&player);
             DrawBau();
             DrawPorta();
+            Drawpapeis();
              EndMode2D();
         
+
+
+
+
+             for(int i = 0; i < 3; i++) {
+    Color cor = (i < vidas) ? RED : DARKGRAY;
+    DrawCircle(30 + i * 30, 30, 10, cor);
+    }
 
         verificar_porta(player.x, player.y, tem_chave, &venceu);
 
@@ -107,6 +132,7 @@ if(venceu) {
         EndDrawing();
     }
 
+    DescarregarPapel();
     DescarregarPorta();
     DescarregarBau();
     descarregar_mapa();

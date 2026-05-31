@@ -1,7 +1,7 @@
 #include "porta.h"
 #include "Mapa.h"
 #include "raylib.h"
-#include <stdio.h>
+
 Porta porta= {0, 0};
 
 static Texture2D textura_porta;
