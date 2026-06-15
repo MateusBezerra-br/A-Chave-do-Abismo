@@ -12,6 +12,8 @@ void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
     ball->radius = 4.0f;
 
     ball->color = RED;
+
+    
 }
 
 void UpdateBall(Ball *ball)

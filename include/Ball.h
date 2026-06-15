@@ -9,7 +9,7 @@ typedef struct Ball
     Vector2 speed;
     float radius;
     Color color;
-
+    
 } Ball;
 
 void InitBall(Ball *ball, float x, float y, float speedX, float speedY);
