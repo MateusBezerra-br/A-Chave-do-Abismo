@@ -24,6 +24,9 @@
 
     Font fonte_texto;
     
+#include "Ball.h"
+#include <stdio.h>
+
 int main(void) {
 
    
@@ -58,9 +61,20 @@ Camera2D camera = {0};
 
 InitCamera(&camera, &player);
 
+Ball balls[4];
+
+InitBall(&balls[0], 156, 1481, 200, 0); 
+InitBall(&balls[1], 1540, 1160, 100, 120); 
+InitBall(&balls[2], 1187, 109, -200, 0); 
+InitBall(&balls[3], 131, 227, 120, 40); 
+
+
 
     while (!WindowShouldClose()) {
 
+        for (int i = 0; i < 4; i++) {
+            UpdateBall(&balls[i]);
+        }
 
 
         AtualizarCamera(&camera, &player);
@@ -84,6 +98,14 @@ InitCamera(&camera, &player);
             
             desenhar_mapa();
             
+
+              for (int i = 0; i < 4; i++) {
+            DrawBall(&balls[i]);
+
+
+
+   }
+
             DrawPlayer(&player);
             DrawBau();
             DrawPorta();
@@ -140,6 +162,11 @@ if(venceu) {
     
 }
             DrawFPS(10, 950);
+             
+             
+            
+            
+            DrawFPS(10, 10);
 
            
 
