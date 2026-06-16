@@ -26,9 +26,9 @@ InitCamera(&camera, &player);
 Ball balls[4];
 
 InitBall(&balls[0], 156, 1481, 200, 0); 
-InitBall(&balls[1], 1477, 1230, -25, 200); 
+InitBall(&balls[1], 1540, 1160, 100, 120); 
 InitBall(&balls[2], 1187, 109, -200, 0); 
-InitBall(&balls[3], 131, 227, 200, 6); 
+InitBall(&balls[3], 131, 227, 120, 40); 
 
 
 

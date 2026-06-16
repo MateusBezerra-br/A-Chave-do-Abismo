@@ -1,7 +1,7 @@
 #include "Ball.h"
 #include "Ball.h"
 #include "Player.h"
-#include <stdio.h>
+#include <math.h>
 
 void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
 {
@@ -25,7 +25,15 @@ void UpdateBall(Ball *ball)
     float novo_x = ball->position.x + ball->speed.x * dt;
     float novo_y = ball->position.y + ball->speed.y * dt;
 
-    
+    if (ball->position.x > 1600)
+{
+    ball->speed.x = -fabs(ball->speed.x);
+}
+
+if (ball->position.y > 1350)
+{
+    ball->speed.y = -fabs(ball->speed.y);
+}
 
     
 
