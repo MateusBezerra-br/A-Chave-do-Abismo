@@ -1,14 +1,15 @@
 #include "raylib.h"
 #include "Bau.h"
+#include "Player.h"
 
-
+extern Font fonte_texto;
 static int acertou= 0;
 static float tempo_acerto = 0;
 static int mostrando_charada = 0;
 static int opcao_selecionada = 0;
 static Texture2D textura_bau;
 
-Bau bau = {800.0 , 747.666, 0};
+Bau bau = {796.0 , 743.666, 0};
 
  void DescarregarBau( ){
         UnloadTexture(textura_bau);
@@ -25,17 +26,22 @@ void InitBau(){
 
     bau.chave_entregue = 0;
 
-    textura_bau = LoadTexture("assets/tilesets_bau.png");
+    textura_bau = LoadTexture("assets/Bau.png");
 
 };
 
 void DrawBau(){
 
-    Rectangle origem = {32, 0,  16, 16};
-    Vector2 pos = {bau.x, bau.y};
-    BeginBlendMode(BLEND_ALPHA);
-    DrawTextureRec(textura_bau, origem, pos, (Color){255,255,255,255});
-    EndBlendMode();
+   
+     DrawTextureEx(
+            textura_bau,
+            (Vector2){bau.x ,bau.y },
+            0.0f,   
+            0.17f,   
+            WHITE
+        );
+    
+   
 
 
 };
@@ -58,35 +64,45 @@ int Proximo_ao_Bau(float px, float py) {
 
 void desenhar_tela_charada(int *vidas, int *tem_chave) {
    
-    DrawRectangle(0, 0, 1300, 1000, (Color){0, 0, 0, 220});
+    DrawRectangle(0, 0, 1300, 1000, (Color){50, 50, 100, 220});
 
     
-    DrawText("Existo desde antes da linguagem mas so fui nomeada depois dela.", 100, 180, 16, WHITE);
-    DrawText("Nao tenho forma mas assumo todas as formas.", 100, 210, 16, WHITE);
-    DrawText("Nao tenho voz mas falo em todas as linguas.", 100, 240, 16, WHITE);
-    DrawText("Cientistas me estudam sem me entender.", 100, 270, 16, WHITE);
-    DrawText("Artistas me retratam sem me ver.", 100, 300, 16, WHITE);
-    DrawText("Sou o lugar que voce conhece mas nunca encontrara no mapa.", 100, 330, 16, WHITE);
-    DrawText("Fui seu refugio e seu pesadelo sem jamais pedir permissao.", 100, 360, 16, WHITE);
-    DrawText("Existo apenas quando voce para de procurar.", 100, 390, 16, WHITE);
-    DrawText("O QUE SOU?", 100, 430, 20, PURPLE);
+   
+    DrawTextEx(fonte_texto,"Não tenho corpo, mas posso lhe mostrar mil rostos.", (Vector2){40, 50}, 22,1, WHITE);
+    DrawTextEx(fonte_texto,"Não tenho mãos, mas construo cidades, oceanos e mundos inteiros.", (Vector2){40, 85}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Não tenho voz, mas sussurro em todas as línguas.", (Vector2){40, 120}, 22, 1,  WHITE);
+    DrawTextEx(fonte_texto,"Cientistas me estudam noite após noite, mas não conseguem me entender.", (Vector2){40, 155}, 22, 1, WHITE);
+
+    DrawTextEx(fonte_texto,"Poetas me perseguem em suas obras.", (Vector2){40, 190}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Pintores tentam reproduzir minhas formas sem nunca terem me visto.", (Vector2){40, 225}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Sou o lugar que você conhece intimamente, embora nunca o encontre em um mapa.", (Vector2){40, 260}, 22, 1, WHITE);
+
+
+    DrawTextEx(fonte_texto,"Já fui seu refúgio, seu desejo mais profundo e o palco de seus maiores medos.", (Vector2){40, 295}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Às vezes lhe entrego respostas.", (Vector2){40, 330}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Às vezes lhe mostro monstros.", (Vector2){40, 365}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Quase sempre desapareço antes que o sol termine de nascer.", (Vector2){40, 400}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Existo apenas quando você abandona a necessidade de me encontrar.", (Vector2){40, 435}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"Morro no instante em que tenta me segurar.", (Vector2){40, 470}, 22, 1, WHITE);
+
+    DrawTextEx(fonte_texto,"Diga-me, O que sou eu ?", (Vector2){40, 505}, 20, 1, WHITE);
 
     
     const char *opcoes[4] = {
-        "1. Mundo dos sonhos",
+        "1. O sonho",
         "2. Passagem do tempo",
         "3. Memoria humana",
-        "4. Paz de espirito"
+        "4. A imaginação"
     };
 
-    DrawText("Escolha a resposta:", 100, 500, 20, WHITE);
+    DrawTextEx(fonte_texto,"Escolha a resposta :", (Vector2){100, 550}, 20, 1, PURPLE);
 
     for(int i = 0; i < 4; i++) {
-        Color cor = (i == opcao_selecionada) ? GREEN : WHITE;
-        DrawText(opcoes[i], 100, 540 + i * 40, 20, cor);
+        Color cor = (i == opcao_selecionada) ? YELLOW : WHITE;
+        DrawTextEx(fonte_texto,opcoes[i], (Vector2){100, 580 + i * 40}, 21, 1, cor);
     }
 
-    DrawText("[1][2][3][4] Escolher   [ESC] Voltar", 100, 720, 16, DARKGRAY);
+    DrawTextEx(fonte_texto,"[ 1 ] [ 2 ] [ 3 ] [ 4 ] Opções   [ ESC ] Voltar  [ ENTER ] Confirmar", (Vector2){100, 760}, 19, 1, PURPLE);
 
     if(IsKeyPressed(KEY_ONE))   opcao_selecionada = 0;
     if(IsKeyPressed(KEY_TWO))   opcao_selecionada = 1;
@@ -100,7 +116,7 @@ void desenhar_tela_charada(int *vidas, int *tem_chave) {
             bau.chave_entregue = 1;
             mostrando_charada = 0;
             acertou= 1;
-            tempo_acerto= 3.0f;
+            tempo_acerto= 2.4f;
         } else {
             
             *vidas -= 1;
@@ -117,7 +133,7 @@ void desenhar_tela_charada(int *vidas, int *tem_chave) {
               if(acertou) {
         tempo_acerto -= GetFrameTime();
         DrawRectangle(300, 850, 700, 80, (Color){0, 0, 0, 220});
-        DrawText("VOCE ACERTOU! Pegue a chave!", 320, 870, 24, GREEN);
+        DrawTextEx(fonte_texto,"VOCE ACERTOU! Pegue a chave!", (Vector2){320, 870}, 24, 1, WHITE);
         if(tempo_acerto <= 0) acertou = 0;
     }
     

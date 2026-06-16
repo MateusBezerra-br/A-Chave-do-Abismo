@@ -2,6 +2,7 @@
 #define BAU_H
 
 #define RAIO_BAU 25.0f
+
 typedef struct {
 
     float x;
@@ -11,6 +12,7 @@ typedef struct {
 } Bau;
 
 extern Bau bau;
+
 void DrawBau( );
 
 void InitBau( );

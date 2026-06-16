@@ -8,7 +8,7 @@ void InitCamera(Camera2D *camera, Player *player) {
 
     camera->rotation = 0.0f;
 
-    camera->zoom = 3.0f;
+    camera->zoom = 8.f;
 }
 
 void AtualizarCamera(Camera2D *camera, Player *player) {

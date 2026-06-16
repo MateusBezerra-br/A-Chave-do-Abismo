@@ -10,6 +10,7 @@
 
 #define ID_PAREDE 305
 #define ID_CHAO_CENTRO 96
+#define ID_CHAO 40
 #define ID_BAU 2
 #define ID_PAPEIS 142
 #define ID_PORTA_BAIXO 171

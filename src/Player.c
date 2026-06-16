@@ -3,13 +3,18 @@
 #include "Mapa.h"
 #include "Bau.h"
 #include "Porta.h"
+#include <stdio.h>
+#include "Npcs.h"
 
+static Texture2D textura_Player;
 
 void InitPlayer(Player *p){
     p->x = 799;
     p->y = 810;
     p->veloc = 100;
     p->raio= 5;
+ 
+    textura_Player = LoadTexture("assets/Player.png");
 }
 
  int Colisaoparede (float x, float y, float raio){
@@ -39,7 +44,8 @@ void UpdatePlayer(Player *p){
     float novo_y = p->y;
     float static antigo_x;
     float static antigo_y;
-
+    float barreira_x=769,barreira_y=740; //barreira da porta
+    
 
     if(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
         novo_x += p->veloc * dt;
@@ -69,9 +75,15 @@ void UpdatePlayer(Player *p){
         p->x -= (novo_x - antigo_x);
         p->y -= (novo_y - antigo_y);
     }
-    if(colide_objeto(p->x, p->y, p->raio, porta.x, porta.y - 16, 16, 32)) {
+    if(colide_objeto(p->x, p->y, p->raio, porta.x , porta.y , 12, 6)) {
         p->x -= (novo_x - antigo_x);
         p->y -= (novo_y - antigo_y);
+    }
+    if(colide_objeto(p->x, p->y, p->raio, barreira_x , barreira_y , 12, 16)){
+        
+        p->x -= (novo_x - antigo_x);
+        p->y -= (novo_y - antigo_y);
+
     }
     else{
      antigo_x = p -> x;
@@ -79,9 +91,17 @@ void UpdatePlayer(Player *p){
     }
 
 
-
 }
 
 void DrawPlayer(Player *p){
-    DrawCircle((int)p->x, (int)p->y, p->raio, BLUE);
+
+   
+
+   DrawTextureEx(
+            textura_Player,
+            (Vector2){p->x - 8 ,p->y - 8 },
+            0.0f,   
+            0.012f,   
+            WHITE
+      );
 }
