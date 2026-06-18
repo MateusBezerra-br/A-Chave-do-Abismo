@@ -62,18 +62,19 @@ Camera2D camera = {0};
 
 InitCamera(&camera, &player);
 
-Ball balls[4];
+Ball balls[7];
 
 InitBall(&balls[0], 156, 1481, 200, 0); 
 InitBall(&balls[1], 1540, 1160, 100, 120); 
 InitBall(&balls[2], 1187, 109, -200, 0); 
-InitBall(&balls[3], 131, 227, 120, 40); 
-
-
+InitBall(&balls[3], 131, 227, -120, -40); 
+InitBall(&balls[4], 1187, 109, 0, 230);
+InitBall(&balls[5], 131, 227, 180, 0);
+InitBall(&balls[6], 1520, 1160, -140, -150);
 
     while (!WindowShouldClose()) {
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 7; i++) {
             UpdateBall(&balls[i]);
         }
 
@@ -100,7 +101,7 @@ InitBall(&balls[3], 131, 227, 120, 40);
             desenhar_mapa();
             
 
-              for (int i = 0; i < 4; i++) {
+              for (int i = 0; i < 7; i++) {
             DrawBall(&balls[i]);
 
 
@@ -112,6 +113,9 @@ InitBall(&balls[3], 131, 227, 120, 40);
             DrawPorta();
             Drawpapeis();
             DrawNpcs();
+            
+            
+
              EndMode2D();
         
 
