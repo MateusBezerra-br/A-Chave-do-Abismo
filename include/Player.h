@@ -12,6 +12,8 @@ typedef struct {
     int veloc;
     
     int raio;
+
+    int vidas;
     
 } Player;
 

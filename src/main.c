@@ -7,6 +7,8 @@
 #include "Papeis.h"
 #include "Npcs.h"
 #include <stdio.h>
+#include "Ball.h"
+#include "GameOver.h"
 
  int todos_coletados(){
      int i;
@@ -24,14 +26,13 @@
 
     Font fonte_texto;
     
-#include "Ball.h"
-#include <stdio.h>
+
 
 int main(void) {
 
    
     InitWindow(1300, 1000, "A Chave do Abismo");
-     SetExitKey(KEY_NULL);
+     SetExitKey(KEY_O);
     SetTargetFPS(60);
     
     
@@ -41,11 +42,10 @@ int main(void) {
      Player player;
     InitPlayer(&player);
     
-
    
     InitBau();
     int tem_chave = 0;
-    int vidas = 3;
+   
     int venceu= 0;
     
     
@@ -54,6 +54,7 @@ int main(void) {
     InitPapeis();
     InitNpc();
 
+    
     fonte_texto = LoadFontEx("assets/bedstead-bold.otf",32, 0, 500);
 SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
 
@@ -83,7 +84,7 @@ InitBall(&balls[3], 131, 227, 120, 40);
             UpdatePlayer(&player);
            Verificar_papel(player.x, player.y);
 
-           UpdateNpcs(player.x,player.y, &vidas);
+           UpdateNpcs(player.x,player.y, &player.vidas);
 
         BeginDrawing();
 
@@ -117,8 +118,8 @@ InitBall(&balls[3], 131, 227, 120, 40);
 
 
 
-             for(int i = 0; i < 3; i++) {
-    Color cor = (i < vidas) ? RED : DARKGRAY;
+             for(int i = 0; i < 4; i++) {
+    Color cor = (i < player.vidas) ? RED : DARKGRAY;
     DrawCircle(30 + i * 40, 30, 14, cor);
     }
 
@@ -145,7 +146,7 @@ if(Proximo_ao_Bau(player.x, player.y) && todos_coletados() && !bau.chave_entregu
 }
 
 
-Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &vidas, &tem_chave);
+Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &tem_chave);
 
 if(venceu) {
     DrawRectangle(0, 0, 1300, 1000, (Color){0, 0, 0, 220});
@@ -161,12 +162,21 @@ if(venceu) {
     }
     
 }
+if(player.vidas == 0){
+
+        GameOver( &player, &tem_chave);
+        
+        
+        }
+
+
+
             DrawFPS(10, 950);
              
              
             
             
-            DrawFPS(10, 10);
+            
 
            
 

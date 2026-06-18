@@ -13,6 +13,7 @@ void InitPlayer(Player *p){
     p->y = 810;
     p->veloc = 100;
     p->raio= 5;
+    p->vidas= 4;
  
     textura_Player = LoadTexture("assets/Player.png");
 }
