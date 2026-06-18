@@ -75,7 +75,7 @@ InitBall(&balls[6], 1520, 1160, -140, -150);
     while (!WindowShouldClose()) {
 
         for (int i = 0; i < 7; i++) {
-            UpdateBall(&balls[i]);
+            UpdateBall(&balls[i], &player.vidas, player.x, player.y);
         }
 
 

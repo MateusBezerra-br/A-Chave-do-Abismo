@@ -114,12 +114,7 @@ void InitNpc()
     }
 };
 
-//Tem que olhar esse bagulho aqui
-static int colide_Npcs(float x, float y, float raio, float npcX, float npcY, float ow, float oh){
-    
-        Rectangle npc = {npcX, npcY, ow, oh};
-    return CheckCollisionCircleRec((Vector2){x, y}, raio, npc);
-  }
+
 
 void UpdateNpcs(float playerX, float playerY, int *vidas){
 

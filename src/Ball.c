@@ -3,6 +3,9 @@
 #include "Player.h"
 #include <math.h>
 
+
+
+
 void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
 {
     ball->position = (Vector2){x, y};
@@ -16,7 +19,7 @@ void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
     
 }
 
-void UpdateBall(Ball *ball)
+void UpdateBall(Ball *ball,int *vidas, float PlayerX, float PlayerY)
 {
     
 
@@ -24,6 +27,20 @@ void UpdateBall(Ball *ball)
 
     float novo_x = ball->position.x + ball->speed.x * dt;
     float novo_y = ball->position.y + ball->speed.y * dt;
+
+      
+        
+    float dx = ball->position.x - PlayerX;
+    float dy = ball->position.y - PlayerY;
+
+    float distancia = sqrt(dx*dx + dy*dy);
+
+    if(distancia <= ball->radius + 10)
+    {
+        (*vidas)--;
+    }
+
+    
 
     if (ball->position.x > 1600)
 {
@@ -35,6 +52,8 @@ if (ball->position.y > 1350)
     ball->speed.y = -fabs(ball->speed.y);
 }
 
+
+    
     
 
     if(!Colisaoparede(novo_x, ball->position.y, ball->radius))
