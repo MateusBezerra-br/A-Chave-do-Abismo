@@ -19,7 +19,7 @@ void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
     
 }
 
-void UpdateBall(Ball *ball,int *vidas, float PlayerX, float PlayerY)
+void UpdateBall(Ball *ball,int *vidas, float PlayerX, float PlayerY, Player *player)
 {
     
 
@@ -37,7 +37,10 @@ void UpdateBall(Ball *ball,int *vidas, float PlayerX, float PlayerY)
 
     if(distancia <= ball->radius + 10)
     {
-        (*vidas)--;
+        *vidas -= 1;
+        player->x = ball->checkX;
+        player->y = ball->checkY;
+        
     }
 
     
@@ -77,5 +80,7 @@ if (ball->position.y > 1350)
 
 void DrawBall(Ball *ball)
 {
+    for(int e= 0; e < 7; e++){
     DrawCircleV(ball->position, ball->radius, ball->color);
+    }
 }

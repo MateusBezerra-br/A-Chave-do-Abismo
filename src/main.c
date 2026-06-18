@@ -72,11 +72,35 @@ InitBall(&balls[4], 1187, 109, 0, 230);
 InitBall(&balls[5], 131, 227, 180, 0);
 InitBall(&balls[6], 1520, 1160, -140, -150);
 
+balls[0].checkX= 135;
+balls[0].checkY= 1365;
+
+balls[1].checkX= 1508;
+balls[1].checkY= 1400;
+
+balls[2].checkX= 1049;
+balls[2].checkY= 159;
+
+balls[3].checkX= 200;
+balls[3].checkY= 361;
+
+balls[4].checkX= 1049;
+balls[4].checkY= 159;
+
+balls[5].checkX= 200;
+balls[5].checkY= 365;
+
+balls[6].checkX= 1508;
+balls[6].checkY= 1400;
+
     while (!WindowShouldClose()) {
 
         for (int i = 0; i < 7; i++) {
-            UpdateBall(&balls[i], &player.vidas, player.x, player.y);
+            UpdateBall(&balls[i], &player.vidas, player.x, player.y, &player);
         }
+
+       
+
 
 
         AtualizarCamera(&camera, &player);
@@ -89,13 +113,15 @@ InitBall(&balls[6], 1520, 1160, -140, -150);
 
         BeginDrawing();
 
+        
+
         ClearBackground(BLACK);
         
         
 
         BeginMode2D(camera);
 
-            
+          
             camera.target = (Vector2){player.x, player.y};
             
             desenhar_mapa();
@@ -173,7 +199,8 @@ if(player.vidas == 0){
         
         }
 
-
+        DrawText(TextFormat("X: %.0f", player.x), 10, 10, 20, WHITE);
+DrawText(TextFormat("Y: %.0f", player.y), 10, 35, 20, WHITE);
 
             DrawFPS(10, 950);
              
