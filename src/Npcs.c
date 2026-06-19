@@ -394,7 +394,7 @@ void UpdateNpcs(float playerX, float playerY, int *vidas){
     
 
 
-    if(npcs[j].distancia >= npcs[j].visao && npcs[j].estado == PERSEGUINDO || npcs[j].distancia <= 2 && npcs[j].estado == PERSEGUINDO){
+    if(npcs[j].distancia >= npcs[j].visao && npcs[j].estado == PERSEGUINDO || npcs[j].distancia <= 3.5 && npcs[j].estado == PERSEGUINDO){
                 npcs[j].estado = RESPAWN;
                 npcs[j].tempoRespawn = 3.f;
 
@@ -407,7 +407,7 @@ void UpdateNpcs(float playerX, float playerY, int *vidas){
 
         npcs[j].tempoRespawn -= GetFrameTime();
 
-        if(npcs[j].distancia <= 5){
+        if(npcs[j].distancia <= 3.5){
 
             *vidas -= 1;
            

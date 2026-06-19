@@ -10,13 +10,17 @@
 #include "Ball.h"
 #include "GameOver.h"
 
+
+
+
+
  int todos_coletados(){
      int i;
     for(i=0 ; i < 4; i++){
        
         if(papeis[i].coletado == 1){
       
-      return 0;
+      return 1;
      }
 
     }
@@ -44,6 +48,7 @@ int main(void) {
     
    
     InitBau();
+
     int tem_chave = 0;
    
     int venceu= 0;
@@ -179,17 +184,12 @@ if(Proximo_ao_Bau(player.x, player.y) && todos_coletados() && !bau.chave_entregu
 Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &tem_chave);
 
 if(venceu) {
-    DrawRectangle(0, 0, 1300, 1000, (Color){0, 0, 0, 220});
+    DrawRectangle(0, 0, 1300, 1000, WHITE);
     DrawTextEx(fonte_texto,"VOCE ESCAPOU!", (Vector2){400, 350}, 48, 1, GOLD);
     DrawTextEx(fonte_texto,"PARABENS !", (Vector2){500, 430}, 27, 1, WHITE);
-    DrawTextEx(fonte_texto,"[ENTER] Jogar novamente", (Vector2){300, 520}, 20, 1, GRAY);
+    DrawTextEx(fonte_texto,"Digite seu nome", (Vector2){450, 520}, 20, 1, GREEN);
 
-    if(IsKeyPressed(KEY_ENTER)) {
-        venceu = 0;
-        tem_chave = 0;
-        InitBau();
-        InitPlayer(&player);
-    }
+
     
 }
 if(player.vidas == 0){

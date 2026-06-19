@@ -32,7 +32,9 @@ float porta_x= 769, porta_y= 748;
     float dist = dx*dx + dy*dy;
 
     if(dist < 200 ) {
-        if(tem_chave) *venceu = 1;
+        if(tem_chave){ 
+            *venceu = 1;
+        }
     }
 }
 
