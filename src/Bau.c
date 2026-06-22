@@ -117,7 +117,7 @@ void desenhar_tela_charada(int *vidas, int *tem_chave) {
             mostrando_charada = 0;
             acertou= 1;
             tempo_acerto= 2.4f;
-        } else {
+        } else if(opcao_selecionada != 0 ) {
             
             *vidas -= 1;
             mostrando_charada = 0;
@@ -138,6 +138,7 @@ void desenhar_tela_charada(int *vidas, int *tem_chave) {
     }
     
     if(bau.chave_entregue) return;
+   
    
         if(Proximo_ao_Bau(px, py)){
             if(fragmentos_coletados < 4){

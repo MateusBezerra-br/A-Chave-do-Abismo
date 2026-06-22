@@ -9,9 +9,9 @@
 #include <stdio.h>
 #include "Ball.h"
 #include "GameOver.h"
-
-
-
+#include "string.h"
+#include "Ranking.h"
+#include "Ver_Ranking.h"
 
 
  int todos_coletados(){
@@ -34,9 +34,11 @@
 
 int main(void) {
 
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    
    
     InitWindow(1300, 1000, "A Chave do Abismo");
-     SetExitKey(KEY_O);
+     SetExitKey(KEY_DOWN);
     SetTargetFPS(60);
     
     
@@ -79,24 +81,25 @@ InitBall(&balls[6], 1520, 1160, -140, -150);
 
 balls[0].checkX= 135;
 balls[0].checkY= 1365;
-
 balls[1].checkX= 1508;
 balls[1].checkY= 1400;
-
 balls[2].checkX= 1049;
 balls[2].checkY= 159;
-
 balls[3].checkX= 200;
 balls[3].checkY= 361;
-
 balls[4].checkX= 1049;
 balls[4].checkY= 159;
-
 balls[5].checkX= 200;
 balls[5].checkY= 365;
-
 balls[6].checkX= 1508;
 balls[6].checkY= 1400;
+
+    double time_inicial = GetTime();
+    int vitoria = 0;
+     char nome[25];
+     int tam = 0;
+
+    double time_gameplay = GetTime() - time_inicial; 
 
     while (!WindowShouldClose()) {
 
@@ -112,6 +115,7 @@ balls[6].checkY= 1400;
 
         if(!esta_na_charada())
             UpdatePlayer(&player);
+
            Verificar_papel(player.x, player.y);
 
            UpdateNpcs(player.x,player.y, &player.vidas);
@@ -183,12 +187,83 @@ if(Proximo_ao_Bau(player.x, player.y) && todos_coletados() && !bau.chave_entregu
 
 Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &tem_chave);
 
+if(!venceu){
+ time_gameplay = GetTime() - time_inicial;
+}
+
 if(venceu) {
     DrawRectangle(0, 0, 1300, 1000, WHITE);
     DrawTextEx(fonte_texto,"VOCE ESCAPOU!", (Vector2){400, 350}, 48, 1, GOLD);
-    DrawTextEx(fonte_texto,"PARABENS !", (Vector2){500, 430}, 27, 1, WHITE);
-    DrawTextEx(fonte_texto,"Digite seu nome", (Vector2){450, 520}, 20, 1, GREEN);
+    DrawTextEx(fonte_texto,"PARABENS !", (Vector2){500, 430}, 27, 1, GOLD);
+    DrawTextEx(fonte_texto,"Tecle dois para digitar seu nome ou tres para ver o ranking", (Vector2){450, 520}, 20, 1, GREEN);
+    DrawTextEx(fonte_texto,"Tecle tres para ver o ranking", (Vector2){450, 550}, 20, 1, GREEN);
 
+    player.x = 772;
+    player.y = 768;
+
+    if(IsKeyPressed(KEY_TWO)){
+        vitoria = 1;
+    }
+    if(IsKeyPressed(KEY_THREE)){
+        vitoria = 2;
+    }
+    if(vitoria == 1){
+
+    int q=0;
+    int tecla = GetCharPressed();
+
+    while(tecla > 0){
+
+        if(tecla >= 32 && tecla <= 125 && tam < 24){
+            nome[tam] = (char)tecla;
+            tam++;
+            nome[tam] = '\0';
+        }
+
+        tecla = GetCharPressed();
+    }
+     if(GetCharPressed() && tam > 0){
+        tam++;
+        nome[tam] = '\0';
+    }
+    if(IsKeyPressed(KEY_BACKSPACE) && tam > 0){
+        tam--;
+        nome[tam] = '\0';
+    }
+    if(IsKeyPressed(KEY_ENTER)){
+
+     Ranking( time_gameplay,nome, player.vidas );
+     
+     break;
+    
+    }
+    if(tam++){
+        q += 20;
+    }
+    if(tam--){
+        q -=20 ;
+    }
+    DrawRectangle(0,0,1300,1000,BLACK);
+
+DrawTextEx(fonte_texto,
+           "Digite seu nome:",
+           (Vector2){400,300},
+           40,1,GOLD);
+
+DrawTextEx(fonte_texto,
+           nome,
+           (Vector2){450+q,400},
+           35,1,WHITE);
+           
+
+
+DrawText("[ENTER] Confirmar",450,500,30,PURPLE);
+
+   }
+    if(vitoria == 2){
+
+       Ranking_leitura();
+    }
 
     
 }
@@ -204,15 +279,10 @@ DrawText(TextFormat("Y: %.0f", player.y), 10, 35, 20, WHITE);
 
             DrawFPS(10, 950);
              
-             
-            
-            
-            
-
-           
-
         EndDrawing();
     }
+
+
 
     UnloadFont(fonte_texto);
     DescarregarNpcs();
@@ -222,9 +292,9 @@ DrawText(TextFormat("Y: %.0f", player.y), 10, 35, 20, WHITE);
     descarregar_mapa();
     CloseWindow();
 
+       
     return 0;
 }
-
 
 
 
