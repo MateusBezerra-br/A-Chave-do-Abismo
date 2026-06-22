@@ -35,7 +35,7 @@ int main(void) {
     InitWindow(1300, 1000, "A Chave do Abismo");
      SetExitKey(KEY_O);
     SetTargetFPS(60);
-    RunMenu();                              // Set a custom key to exit program (default is ESC)
+    RunMenu();                              
     
     
     carregar_mapa();

@@ -1,12 +1,8 @@
 #include "raylib.h"
-#include <stdio.h>
 
 void RunMenu(void)
 {
     Texture2D menu = LoadTexture("assets/menu.png");
-
-    printf("Largura: %d\n", menu.width);
-    printf("Altura: %d\n", menu.height);
 
     while (!WindowShouldClose())
     {
@@ -14,7 +10,22 @@ void RunMenu(void)
 
         ClearBackground(BLACK);
 
-        DrawTexture(menu, 0, 0, WHITE);
+        DrawTexturePro(
+            menu,
+            (Rectangle){0, 0, menu.width, menu.height},
+            (Rectangle){0, 0, 1300, 1000},
+            (Vector2){0, 0},
+            0.0f,
+            WHITE
+        );
+
+        DrawText(
+            "ENTER - JOGAR",
+            540,
+            835,
+            24,
+            WHITE
+        );
 
         EndDrawing();
 
