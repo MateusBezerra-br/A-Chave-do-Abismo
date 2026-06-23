@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "Ball.h"
 #include "GameOver.h"
+#include "Menu.h"
 
 
 
@@ -38,6 +39,7 @@ int main(void) {
     InitWindow(1300, 1000, "A Chave do Abismo");
      SetExitKey(KEY_O);
     SetTargetFPS(60);
+    RunMenu();                              
     
     
     carregar_mapa();
