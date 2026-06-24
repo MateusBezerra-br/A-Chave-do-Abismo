@@ -24,7 +24,7 @@
        
         if(papeis[i].coletado == 1){
       
-      return 1;
+      return 0;
      }
 
     }
@@ -32,6 +32,8 @@
     return 1;
     };
 
+
+    
     Font fonte_texto;
     
 
@@ -41,7 +43,7 @@ int main(void) {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     
    
-    InitWindow(1300, 1000, "A Chave do Abismo");
+    InitWindow(1500, 1000, "A Chave do Abismo");
      SetExitKey(KEY_DOWN);
     SetTargetFPS(60);
     RunMenu();                              
@@ -67,8 +69,9 @@ int main(void) {
     InitNpc();
 
     
+    Texture2D Tela_vitoria = LoadTexture("assets/tela_vitoria.png");
     fonte_texto = LoadFontEx("assets/bedstead-bold.otf",32, 0, 500);
-SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
+    SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
 
 Camera2D camera = {0};
 
@@ -76,13 +79,14 @@ InitCamera(&camera, &player);
 
 Ball balls[7];
 
-InitBall(&balls[0], 156, 1481, 200, 0); 
-InitBall(&balls[1], 1540, 1160, 100, 120); 
-InitBall(&balls[2], 1187, 109, -200, 0); 
-InitBall(&balls[3], 131, 227, -120, -40); 
-InitBall(&balls[4], 1187, 109, 0, 230);
-InitBall(&balls[5], 131, 227, 180, 0);
-InitBall(&balls[6], 1520, 1160, -140, -150);
+InitBall(&balls[0], 156, 1481, 185, 0); 
+InitBall(&balls[1], 1540, 1160, 85, 105); 
+InitBall(&balls[2], 1187, 109, -185, 0); 
+InitBall(&balls[3], 131, 227, -105, -25); 
+InitBall(&balls[4], 1187, 109, 0, 215);
+InitBall(&balls[5], 131, 227, 165, 0);
+InitBall(&balls[6], 1520, 1160, -125, -135);
+
 
 balls[0].checkX= 135;
 balls[0].checkY= 1365;
@@ -174,13 +178,13 @@ float dx = player.x - porta.x ;
 float dy = player.y - porta.y ;
 if(dx*dx + dy*dy < 200 && !tem_chave) {
     DrawRectangle(50, 850, 1200, 60, (Color){0,0,0,200});
-    DrawTextEx(fonte_texto,"Voce precisa da chave para abrir esta porta!", (Vector2){70, 865}, 24, 1, (Color){ 180, 106, 79, 255 });
+    DrawTextEx(fonte_texto,"Voce precisa da chave para sair daqui!", (Vector2){70, 865}, 24, 1, (Color){ 180, 106, 79, 255 });
 }
      
         
 if(Proximo_ao_Bau(player.x, player.y) && !todos_coletados()) {
     DrawRectangle(50, 850, 1200, 60, (Color){0,0,0,200});
-    DrawTextEx(fonte_texto,"Encontre os 4 fragmentos antes de me responder!", (Vector2){70, 865}, 24, 1,  WHITE);
+    DrawTextEx(fonte_texto,"Encontre os 4 fragmentos para responder a charada!", (Vector2){70, 865}, 24, 1,  WHITE);
 }
 
 
@@ -197,26 +201,30 @@ if(!venceu){
 }
 
 if(venceu) {
-    DrawRectangle(0, 0, 1300, 1000, WHITE);
-    DrawTextEx(fonte_texto,"VOCE ESCAPOU!", (Vector2){400, 350}, 48, 1, GOLD);
-    DrawTextEx(fonte_texto,"PARABENS !", (Vector2){500, 430}, 27, 1, GOLD);
-    DrawTextEx(fonte_texto,"Tecle dois para digitar seu nome ou tres para ver o ranking", (Vector2){450, 520}, 20, 1, GREEN);
-    DrawTextEx(fonte_texto,"Tecle tres para ver o ranking", (Vector2){450, 550}, 20, 1, GREEN);
+
+
+     DrawTexturePro(
+            Tela_vitoria,
+            (Rectangle){0, 0, Tela_vitoria.width, Tela_vitoria.height},
+            (Rectangle){0, 0, 1500, 1000},
+            (Vector2){0, 0},
+            0.0f,
+            WHITE
+        );
+
+   
+    DrawTextEx(fonte_texto,"Tecle dois para digitar seu nome", (Vector2){455, 890}, 31, 1, WHITE);
 
     player.x = 772;
     player.y = 768;
 
-    if(IsKeyPressed(KEY_TWO)){
+    if(IsKeyReleased(KEY_TWO)){
         vitoria = 1;
-    }
-    if(IsKeyPressed(KEY_THREE)){
-        vitoria = 2;
     }
     if(vitoria == 1){
 
-    int q=0;
     int tecla = GetCharPressed();
-
+    
     while(tecla > 0){
 
         if(tecla >= 32 && tecla <= 125 && tam < 24){
@@ -242,53 +250,48 @@ if(venceu) {
      break;
     
     }
-    if(tam++){
-        q += 20;
-    }
-    if(tam--){
-        q -=20 ;
-    }
-    DrawRectangle(0,0,1300,1000,BLACK);
+   
+    DrawRectangle(0,0,1500,1000,BLACK);
 
 DrawTextEx(fonte_texto,
            "Digite seu nome:",
-           (Vector2){400,300},
+           (Vector2){490,300},
            40,1,GOLD);
 
 DrawTextEx(fonte_texto,
            nome,
-           (Vector2){450+q,400},
+           (Vector2){465,400},
            35,1,WHITE);
            
 
 
-DrawText("[ENTER] Confirmar",450,500,30,PURPLE);
-
-   }
-    if(vitoria == 2){
-
-       Ranking_leitura();
+DrawTextEx(fonte_texto,"[ ENTER ] CONFIRMAR",(Vector2){550,500},30, 1, PURPLE);
     }
-
+  
     
 }
-if(player.vidas == 0){
+if(player.vidas <= 0){
 
         GameOver( &player, &tem_chave);
-        
-        
+       
+         if(IsKeyPressed(KEY_ENTER)){
+      time_inicial = GetTime();
+      time_gameplay = 0;
+         }
+ 
         }
 
-        DrawText(TextFormat("X: %.0f", player.x), 10, 10, 20, WHITE);
-DrawText(TextFormat("Y: %.0f", player.y), 10, 35, 20, WHITE);
+DrawText(TextFormat("X: %.0f", player.x), 10, 935, 20, WHITE);
+DrawText(TextFormat("Y: %.0f", player.y), 10, 955, 20, WHITE);
+DrawText(TextFormat("tempo: %.2lf",time_gameplay ), 10, 975, 20, WHITE);
 
-            DrawFPS(10, 950);
+          
              
         EndDrawing();
     }
+   
 
-
-
+    
     UnloadFont(fonte_texto);
     DescarregarNpcs();
     DescarregarPapel();

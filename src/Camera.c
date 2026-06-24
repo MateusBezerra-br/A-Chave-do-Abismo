@@ -4,7 +4,7 @@ void InitCamera(Camera2D *camera, Player *player) {
 
     camera->target = (Vector2){player->x, player->y};
 
-    camera->offset = (Vector2){1450 / 2.0f, 1000 / 2.0f};
+    camera->offset = (Vector2){1500 / 2.0f, 1000 / 2.0f};
 
     camera->rotation = 0.0f;
 

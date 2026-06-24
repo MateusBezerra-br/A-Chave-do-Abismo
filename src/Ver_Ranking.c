@@ -3,8 +3,9 @@
 #include "raylib.h"
 #include <stdio.h>
 #include <string.h>
-#include "Ranking.h"
+
 extern Font fonte_texto;
+
 
 struct Players {
 
@@ -16,6 +17,7 @@ struct Players {
 
 void Ranking_leitura ( ){
 
+    
       int j, pos,  contador= 0; 
     
     char linha[200], lixo [150];
@@ -33,7 +35,7 @@ void Ranking_leitura ( ){
         return ;
     }
 
-    DrawRectangle(0, 0, 1300, 1000, BLACK);
+   
     
     
    while(fgets(linha, sizeof(linha), arquivo) != NULL){
@@ -54,31 +56,26 @@ void Ranking_leitura ( ){
 
  fclose(arquivo);
 
-    DrawTextEx(fonte_texto,"__________________________RANKING________________________\n" 
-             "Pos          Nome                 Tempo_gasto       Vidas\n", (Vector2){100, 50}, 30, 1,  WHITE);
-    
+ 
 
   for(i = 0; i < contador; i++)
 {
-    DrawTextEx(fonte_texto,
-               TextFormat("%d", i+1),
-               (Vector2){100, 140+80*i},
-               30, 1, GOLD);
+  
 
     DrawTextEx(fonte_texto,
-               players[i].seu_nome,
-               (Vector2){240, 140+80*i},
-               30, 1, WHITE);
+               TextFormat( players[i].seu_nome),
+               (Vector2){420, 316+47*i},
+               29, 2, WHITE);
 
     DrawTextEx(fonte_texto,
                TextFormat("%.2lfs", players[i].seu_tempo),
-               (Vector2){800, 140+80*i},
-               30, 1, BLUE);
+               (Vector2){920, 316+47*i},
+               32, 3.2, BROWN);
 
     DrawTextEx(fonte_texto,
                TextFormat("%d", players[i].seus_coracoes),
-               (Vector2){1110, 140+80*i},
-               30, 1, RED);
+               (Vector2){1160, 316+47*i},
+               32, 1, RED);
 }
 
     

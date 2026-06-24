@@ -19,8 +19,8 @@ float porta_x= 769, porta_y= 748;
  void DrawPorta() {
     Rectangle origem_cima  = {160, 96,  16+3, 16};
     Rectangle origem_baixo = {160, 112, 16+3, 16};
-    DrawTextureRec(textura_porta, origem_cima,  (Vector2){porta_x, porta_y - 16}, WHITE);
-    DrawTextureRec(textura_porta, origem_baixo, (Vector2){porta_x, porta_y},      WHITE);
+    DrawTextureRec(textura_porta, origem_cima,  (Vector2){porta_x - 2, porta_y - 16}, WHITE);
+    DrawTextureRec(textura_porta, origem_baixo, (Vector2){porta_x -2, porta_y},      WHITE);
 
 }
 

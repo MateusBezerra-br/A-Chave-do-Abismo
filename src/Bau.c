@@ -9,7 +9,7 @@ static int mostrando_charada = 0;
 static int opcao_selecionada = 0;
 static Texture2D textura_bau;
 
-Bau bau = {796.0 , 743.666, 0};
+Bau bau = {800.0 , 743.666, 0};
 
  void DescarregarBau( ){
         UnloadTexture(textura_bau);
@@ -64,28 +64,28 @@ int Proximo_ao_Bau(float px, float py) {
 
 void desenhar_tela_charada(int *vidas, int *tem_chave) {
    
-    DrawRectangle(0, 0, 1300, 1000, (Color){50, 50, 100, 220});
+    DrawRectangle(0, 0, 1500, 1000, (Color){ 0, 0, 0, 180 });
 
     
    
-    DrawTextEx(fonte_texto,"Não tenho corpo, mas posso lhe mostrar mil rostos.", (Vector2){40, 50}, 22,1, WHITE);
-    DrawTextEx(fonte_texto,"Não tenho mãos, mas construo cidades, oceanos e mundos inteiros.", (Vector2){40, 85}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Não tenho voz, mas sussurro em todas as línguas.", (Vector2){40, 120}, 22, 1,  WHITE);
-    DrawTextEx(fonte_texto,"Cientistas me estudam noite após noite, mas não conseguem me entender.", (Vector2){40, 155}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"NÃO TENHO CORPO, MAS POSSO LHE MOSTRAR MIL ROSTOS.", (Vector2){80, 50}, 22,1, WHITE);
+    DrawTextEx(fonte_texto,"NÃO TENHO MÃOS, MAS CONSTRUO CIDADES, OCEANOS E MUNDOS INTEIROS.", (Vector2){80, 85}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"NÃO TENHO VOZ, MAS SUSSURRO EM TODAS AS LÍNGUAS.", (Vector2){80, 120}, 22, 1,  WHITE);
+    DrawTextEx(fonte_texto,"CIENTISTAS ME ESTUDAM NOITE APÓS NOITE, MAS NÃO CONSEGUEM ME ENTENDER.", (Vector2){80, 155}, 22, 1, WHITE);
 
-    DrawTextEx(fonte_texto,"Poetas me perseguem em suas obras.", (Vector2){40, 190}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Pintores tentam reproduzir minhas formas sem nunca terem me visto.", (Vector2){40, 225}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Sou o lugar que você conhece intimamente, embora nunca o encontre em um mapa.", (Vector2){40, 260}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"POETAS ME PERSEGUEM EM SUAS OBRAS.", (Vector2){80, 190}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"PINTORES TENTAM REPRODUZIR MINHAS FORMAS SEM NUNCA TEREM ME VISTO.", (Vector2){80, 225}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"SOU O LUGAR QUE VOCÊ CONHECE INTIMAMENTE, EMBORA NUNCA O ENCONTRE EM UM MAPA.", (Vector2){80, 260}, 22, 1, WHITE);
 
 
-    DrawTextEx(fonte_texto,"Já fui seu refúgio, seu desejo mais profundo e o palco de seus maiores medos.", (Vector2){40, 295}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Às vezes lhe entrego respostas.", (Vector2){40, 330}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Às vezes lhe mostro monstros.", (Vector2){40, 365}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Quase sempre desapareço antes que o sol termine de nascer.", (Vector2){40, 400}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Existo apenas quando você abandona a necessidade de me encontrar.", (Vector2){40, 435}, 22, 1, WHITE);
-    DrawTextEx(fonte_texto,"Morro no instante em que tenta me segurar.", (Vector2){40, 470}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"JÁ FUI SEU REFÚGIO, SEU DESEJO MAIS PROFUNDO E O PALCO DE SEUS MAIORES MEDOS.", (Vector2){80, 295}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"ÀS VEZES LHE ENTREGO RESPOSTAS.", (Vector2){80, 330}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"ÀS VEZES LHE MOSTRO MONSTROS.", (Vector2){80, 365}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"QUASE SEMPRE DESAPAREÇO ANTES QUE O SOL TERMINE DE NASCER.", (Vector2){80, 400}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"EXISTO APENAS QUANDO VOCÊ ABANDONA A NECESSIDADE DE ME ENCONTRAR.", (Vector2){80, 435}, 22, 1, WHITE);
+    DrawTextEx(fonte_texto,"MORRO NO INSTANTE EM QUE TENTA ME SEGURAR.", (Vector2){80, 470}, 22, 1, WHITE);
 
-    DrawTextEx(fonte_texto,"Diga-me, O que sou eu ?", (Vector2){40, 505}, 20, 1, WHITE);
+    DrawTextEx(fonte_texto,"DIGA-ME, O QUE SOU EU ?", (Vector2){80, 505}, 20, 1, WHITE);
 
     
     const char *opcoes[4] = {
@@ -95,14 +95,14 @@ void desenhar_tela_charada(int *vidas, int *tem_chave) {
         "4. A imaginação"
     };
 
-    DrawTextEx(fonte_texto,"Escolha a resposta :", (Vector2){100, 550}, 20, 1, PURPLE);
+    DrawTextEx(fonte_texto,"ESCOLHA A RESPOSTA :", (Vector2){140, 550}, 20, 1, PURPLE);
 
     for(int i = 0; i < 4; i++) {
         Color cor = (i == opcao_selecionada) ? YELLOW : WHITE;
-        DrawTextEx(fonte_texto,opcoes[i], (Vector2){100, 580 + i * 40}, 21, 1, cor);
+        DrawTextEx(fonte_texto,opcoes[i], (Vector2){140, 580 + i * 40}, 21, 1, cor);
     }
 
-    DrawTextEx(fonte_texto,"[ 1 ] [ 2 ] [ 3 ] [ 4 ] Opções   [ ESC ] Voltar  [ ENTER ] Confirmar", (Vector2){100, 760}, 19, 1, PURPLE);
+    DrawTextEx(fonte_texto,"[ 1 ] [ 2 ] [ 3 ] [ 4 ] OPÇÕES   [ ESC ] VOLTAR  [ ENTER ] CONFIRMAR", (Vector2){100, 760}, 19, 1, PURPLE);
 
     if(IsKeyPressed(KEY_ONE))   opcao_selecionada = 0;
     if(IsKeyPressed(KEY_TWO))   opcao_selecionada = 1;

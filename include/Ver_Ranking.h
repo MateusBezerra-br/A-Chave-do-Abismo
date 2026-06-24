@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-void Ranking_leitura ( );
+void Ranking_leitura ();
 
 
 #endif

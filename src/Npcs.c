@@ -383,10 +383,7 @@ void UpdateNpcs(float playerX, float playerY, int *vidas){
             if(playerY < npcs[j].y){
                 npcs[j].y -= 1.2;
             }
-            if(IsKeyPressed(KEY_F) ){
-    printf("%.2f\n",npcs[j].distancia);
-    }
-        
+         
         
             
     }

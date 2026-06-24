@@ -20,7 +20,7 @@ void Ranking (double tempo,char nome[30], int coracoes){
 
     int i, j, pos,  contador= 0; 
     
-    char linha[200], lixo [150];
+    char linha[200];
 
     struct Players players[10], novo_player, aux;
 
@@ -41,8 +41,7 @@ void Ranking (double tempo,char nome[30], int coracoes){
     novo_player.seu_tempo = tempo;
     novo_player.seus_coracoes = coracoes ;
 
-    fgets(lixo, sizeof(lixo), arquivo);
-    fgets(lixo, sizeof(lixo), arquivo);
+   
     
 
 while(fgets(linha, sizeof(linha), arquivo) != NULL){
@@ -131,9 +130,7 @@ while(fgets(linha, sizeof(linha), arquivo) != NULL){
 }
     
   
- fprintf(arquivo, "--------------------------RANKING------------------------\n" 
-                     "Pos       Nome                     Tempo_gasto     Vidas\n");
-
+ 
     
 
    for(i = 0; i < contador; i++){

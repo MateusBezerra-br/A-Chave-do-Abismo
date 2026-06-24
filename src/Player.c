@@ -71,7 +71,7 @@ void UpdatePlayer(Player *p){
 
     
     
-    if(colide_objeto(p->x, p->y, p->raio, bau.x, bau.y, 16, 16)) {
+    if(colide_objeto(p->x - 5, p->y, p->raio, bau.x, bau.y+4, 16, 11)) {
         
         p->x -= (novo_x - antigo_x);
         p->y -= (novo_y - antigo_y);
