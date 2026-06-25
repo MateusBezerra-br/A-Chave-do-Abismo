@@ -55,7 +55,7 @@ while(fgets(linha, sizeof(linha), arquivo) != NULL){
           if(contador == 10){
             break;
         } 
-        printf("contador = %d\n", contador);
+       
       
     }  
 }
