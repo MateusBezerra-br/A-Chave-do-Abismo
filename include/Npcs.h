@@ -15,8 +15,6 @@ typedef struct {
 
     int estado;
 
-    int ativo;
-
     int visao;
 
     float tempoRespawn;

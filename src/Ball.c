@@ -3,9 +3,6 @@
 #include "Player.h"
 #include <math.h>
 
-
-
-
 void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
 {
     ball->position = (Vector2){x, y};
@@ -15,51 +12,39 @@ void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
     ball->radius = 4.0f;
 
     ball->color = RED;
-
-    
 }
 
-void UpdateBall(Ball *ball,int *vidas, float PlayerX, float PlayerY, Player *player)
+void UpdateBall(Ball *ball, int *vidas, float PlayerX, float PlayerY, Player *player)
 {
-    
 
     float dt = GetFrameTime();
 
     float novo_x = ball->position.x + ball->speed.x * dt;
     float novo_y = ball->position.y + ball->speed.y * dt;
 
-      
-        
     float dx = ball->position.x - PlayerX;
     float dy = ball->position.y - PlayerY;
 
-    float distancia = sqrt(dx*dx + dy*dy);
+    float distancia = sqrt(dx * dx + dy * dy);
 
-    if(distancia <= ball->radius + 4)
+    if (distancia <= ball->radius + 4)
     {
         *vidas -= 1;
         player->x = ball->checkX;
         player->y = ball->checkY;
-        
     }
 
-    
-
     if (ball->position.x > 1600)
-{
-    ball->speed.x = -fabs(ball->speed.x);
-}
+    {
+        ball->speed.x = -fabs(ball->speed.x);
+    }
 
-if (ball->position.y > 1350)
-{
-    ball->speed.y = -fabs(ball->speed.y);
-}
+    if (ball->position.y > 1350)
+    {
+        ball->speed.y = -fabs(ball->speed.y);
+    }
 
-
-    
-    
-
-    if(!Colisaoparede(novo_x, ball->position.y, ball->radius))
+    if (!Colisaoparede(novo_x, ball->position.y, ball->radius))
     {
         ball->position.x = novo_x;
     }
@@ -68,7 +53,7 @@ if (ball->position.y > 1350)
         ball->speed.x *= -1;
     }
 
-    if(!Colisaoparede(ball->position.x, novo_y, ball->radius))
+    if (!Colisaoparede(ball->position.x, novo_y, ball->radius))
     {
         ball->position.y = novo_y;
     }
@@ -80,8 +65,9 @@ if (ball->position.y > 1350)
 
 void DrawBall(Ball *ball)
 {
-    for(int e= 0; e < 8; e++){
-    DrawCircleV(ball->position, ball->radius, ball->color);
+    for (int e = 0; e < 8; e++)
+    {
+
+        DrawCircleV(ball->position, ball->radius, ball->color);
     }
-    
 }
