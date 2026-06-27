@@ -13,6 +13,9 @@
 #include "Ranking.h"
 #include "Ver_Ranking.h"
 #include "Menu.h"
+#include "Chave.h"
+
+ 
 
 int todos_coletados()
 {
@@ -23,7 +26,7 @@ int todos_coletados()
         if (papeis[i].coletado == 1)
         {
 
-            return 0;
+            return 1;
         }
     }
 
@@ -49,14 +52,19 @@ int main(void)
 
     InitBau();
 
-    int tem_chave = 0;
-
+    int chave_aparece = 0;
+    
     int venceu = 0;
 
     InitPorta();
     InitPapeis();
     InitNpc();
 
+    
+    InitChave(chave_aparece );
+    
+    
+    
     Texture2D Tela_vitoria = LoadTexture("assets/tela_vitoria.png");
     fonte_texto = LoadFontEx("assets/bedstead-bold.otf", 32, 0, 500);
     SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
@@ -94,7 +102,7 @@ int main(void)
     int vitoria = 0;
     char nome[25];
     int tam = 0;
-
+    
     double time_gameplay = GetTime() - time_inicial;
 
     while (!WindowShouldClose())
@@ -111,7 +119,7 @@ int main(void)
             UpdatePlayer(&player);
 
         Verificar_papel(player.x, player.y);
-
+        Verificar_Chave(player.x, player.y, chave_aparece );
         UpdateNpcs(player.x, player.y, &player.vidas);
 
         BeginDrawing();
@@ -135,6 +143,12 @@ int main(void)
         Drawpapeis();
         DrawNpcs();
 
+     
+        DrawChave(chave_aparece );
+       
+        
+        
+
         EndMode2D();
 
         for (int i = 0; i < 4; i++)
@@ -143,11 +157,12 @@ int main(void)
             DrawCircle(30 + i * 40, 30, 14, cor);
         }
 
-        verificar_porta(player.x, player.y, tem_chave, &venceu);
+        verificar_porta(player.x, player.y, chave.coletada, &venceu);
 
         float dx = player.x - porta.x;
         float dy = player.y - porta.y;
-        if (dx * dx + dy * dy < 200 && !tem_chave)
+
+        if (dx * dx + dy * dy < 200 && !chave.coletada)
         {
             DrawRectangle(50, 850, 1200, 60, (Color){0, 0, 0, 200});
             DrawTextEx(fonte_texto, "Voce precisa da chave para sair daqui!", (Vector2){70, 865}, 24, 1, (Color){180, 106, 79, 255});
@@ -159,13 +174,13 @@ int main(void)
             DrawTextEx(fonte_texto, "Encontre os 4 fragmentos para responder a charada!", (Vector2){70, 865}, 24, 1, WHITE);
         }
 
-        if (Proximo_ao_Bau(player.x, player.y) && todos_coletados() && !bau.chave_entregue)
+        if (Proximo_ao_Bau(player.x, player.y) && todos_coletados() &&  !chave_aparece)
         {
             DrawRectangle(50, 850, 1200, 60, (Color){0, 0, 0, 200});
             DrawTextEx(fonte_texto, "[ E ] Responder a charada do bau", (Vector2){70, 865}, 24, 1, GOLD);
         }
 
-        Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &tem_chave);
+        Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &chave_aparece);
 
         if (!venceu)
         {
@@ -245,12 +260,13 @@ int main(void)
         if (player.vidas <= 0)
         {
 
-            GameOver(&player, &tem_chave);
+            GameOver(&player, chave_aparece);
 
             if (IsKeyPressed(KEY_ENTER))
             {
                 time_inicial = GetTime();
                 time_gameplay = 0;
+                chave_aparece = 0;
             }
         }
 
@@ -262,6 +278,7 @@ int main(void)
     }
 
     UnloadFont(fonte_texto);
+    DescarregarChave();
     DescarregarNpcs();
     DescarregarPapel();
     DescarregarPorta();

@@ -7,7 +7,7 @@ typedef struct {
 
     float x;
     float y;
-    int chave_entregue;
+    
 
 } Bau;
 
@@ -17,7 +17,7 @@ void DrawBau( );
 
 void InitBau( );
 
-void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *tem_chave );
+void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostrar_chave );
 
 int Proximo_ao_Bau(float px, float py );
 

@@ -1,6 +1,7 @@
 #include "porta.h"
 #include "Mapa.h"
 #include "raylib.h"
+#include "Chave.h"
 
 Porta porta= {0, 0};
 
