@@ -4,7 +4,9 @@
 
 extern Font fonte_texto;
 static int acertou = 0;
+ int errado = 0;
 static float tempo_acerto = 0;
+static float tempo_errado = 0;
 static int mostrando_charada = 0;
 static int opcao_selecionada = 0;
 static Texture2D textura_bau;
@@ -113,14 +115,20 @@ void desenhar_tela_charada(int *vidas, int *tem_chave)
         }
         else if (opcao_selecionada != 0)
         {
-
+            
             *vidas -= 1;
+            errado= 1;
             mostrando_charada = 0;
+            tempo_errado = 2.4f;
+
         }
     }
+    
+    
 
-    if (IsKeyPressed(KEY_ESCAPE))
+    if (IsKeyPressed(KEY_ESCAPE)){
         mostrando_charada = 0;
+    }
 }
 
 void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *tem_chave)
@@ -130,10 +138,23 @@ void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int
         tempo_acerto -= GetFrameTime();
         DrawRectangle(300, 850, 700, 80, (Color){0, 0, 0, 220});
         DrawTextEx(fonte_texto, "VOCE ACERTOU! Pegue a chave!", (Vector2){320, 870}, 24, 1, WHITE);
-        if (tempo_acerto <= 0)
-            acertou = 0;
-    }
 
+        if (tempo_acerto <= 0){
+            acertou = 0;
+        }
+    }
+     if (errado)
+        {
+    
+            tempo_errado -= GetFrameTime();
+           DrawRectangle(300, 850, 700, 80, (Color){0, 0, 0, 220});
+            DrawTextEx(fonte_texto, "Resposta incorreta!", (Vector2){320, 870}, 24, 1, WHITE);
+            if(tempo_errado <= 0){
+                errado = 0;
+            }
+
+
+        }
     if (bau.chave_entregue)
         return;
 

@@ -23,7 +23,7 @@ int todos_coletados()
         if (papeis[i].coletado == 1)
         {
 
-            return 0;
+            return 1;
         }
     }
 
@@ -40,7 +40,7 @@ int main(void)
     InitWindow(1500, 1000, "A Chave do Abismo");
     SetExitKey(KEY_DOWN);
     SetTargetFPS(60);
-    RunMenu();
+    
 
     carregar_mapa();
 
@@ -56,7 +56,7 @@ int main(void)
     InitPorta();
     InitPapeis();
     InitNpc();
-
+    
     Texture2D Tela_vitoria = LoadTexture("assets/tela_vitoria.png");
     fonte_texto = LoadFontEx("assets/bedstead-bold.otf", 32, 0, 500);
     SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
@@ -90,6 +90,7 @@ int main(void)
     balls[6].checkX = 1508;
     balls[6].checkY = 1400;
 
+    extern int errado;
     double time_inicial = GetTime();
     int vitoria = 0;
     char nome[25];
@@ -97,9 +98,17 @@ int main(void)
 
     double time_gameplay = GetTime() - time_inicial;
 
+    
+
+      RunMenu();
+
     while (!WindowShouldClose())
     {
 
+       
+      
+       
+        
         for (int i = 0; i < 7; i++)
         {
             UpdateBall(&balls[i], &player.vidas, player.x, player.y, &player);
@@ -159,7 +168,7 @@ int main(void)
             DrawTextEx(fonte_texto, "Encontre os 4 fragmentos para responder a charada!", (Vector2){70, 865}, 24, 1, WHITE);
         }
 
-        if (Proximo_ao_Bau(player.x, player.y) && todos_coletados() && !bau.chave_entregue)
+        if (Proximo_ao_Bau(player.x, player.y) && todos_coletados() && !bau.chave_entregue && !errado)
         {
             DrawRectangle(50, 850, 1200, 60, (Color){0, 0, 0, 200});
             DrawTextEx(fonte_texto, "[ E ] Responder a charada do bau", (Vector2){70, 865}, 24, 1, GOLD);
@@ -171,7 +180,7 @@ int main(void)
         {
             time_gameplay = GetTime() - time_inicial;
         }
-
+        
         if (venceu)
         {
 
@@ -219,13 +228,14 @@ int main(void)
                     tam--;
                     nome[tam] = '\0';
                 }
-                if (IsKeyPressed(KEY_ENTER))
+                if (IsKeyReleased(KEY_ENTER))
                 {
 
                     Ranking(time_gameplay, nome, player.vidas);
-
                     break;
+
                 }
+               
 
                 DrawRectangle(0, 0, 1500, 1000, BLACK);
 
