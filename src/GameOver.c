@@ -1,12 +1,13 @@
 #include "raylib.h"
 #include "Gameover.h"
 #include "Player.h"
+#include "Chave.h"
+#include "Papeis.h"
 
 extern Font fonte_texto;
 
-#include "Papeis.h"
 
-void GameOver(Player *player, int *chave)
+void GameOver(Player *player,int spawn_chave)
 {
 
     if (player->vidas == 0)
@@ -23,7 +24,8 @@ void GameOver(Player *player, int *chave)
             int i;
 
             player->vidas = 4;
-            *chave = 0;
+            spawn_chave = 0;
+        
 
             for (i = 0; i < 4; i++)
             {
@@ -33,6 +35,7 @@ void GameOver(Player *player, int *chave)
             InitPlayer(player);
             InitPapeis();
             InitBau();
+           
         }
     }
 }

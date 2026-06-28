@@ -1,7 +1,9 @@
 #include "raylib.h"
 #include "Bau.h"
 #include "Player.h"
+#include "Chave.h"
 
+extern int chave_aparece;
 extern Font fonte_texto;
 static int acertou = 0;
  int errado = 0;
@@ -11,7 +13,7 @@ static int mostrando_charada = 0;
 static int opcao_selecionada = 0;
 static Texture2D textura_bau;
 
-Bau bau = {800.0, 743.666, 0};
+Bau bau = {800.0, 743.666};
 
 void DescarregarBau()
 {
@@ -25,9 +27,6 @@ int esta_na_charada()
 
 void InitBau()
 {
-
-    bau.chave_entregue = 0;
-
     textura_bau = LoadTexture("assets/Bau.png");
 };
 
@@ -106,9 +105,7 @@ void desenhar_tela_charada(int *vidas, int *tem_chave)
     {
         if (opcao_selecionada == 0)
         {
-
             *tem_chave = 1;
-            bau.chave_entregue = 1;
             mostrando_charada = 0;
             acertou = 1;
             tempo_acerto = 2.4f;
@@ -131,7 +128,7 @@ void desenhar_tela_charada(int *vidas, int *tem_chave)
     }
 }
 
-void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *tem_chave)
+void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostra_chave)
 {
     if (acertou)
     {
@@ -155,8 +152,7 @@ void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int
 
 
         }
-    if (bau.chave_entregue)
-        return;
+    
 
     if (Proximo_ao_Bau(px, py))
     {
@@ -174,6 +170,6 @@ void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int
 
     if (mostrando_charada)
     {
-        desenhar_tela_charada(vidas, tem_chave);
+        desenhar_tela_charada(vidas, mostra_chave);
     }
 };
