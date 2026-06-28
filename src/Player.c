@@ -27,16 +27,20 @@ int Colisaoparede(float x, float y, float raio)
     int esquerda = (int)(x - raio) / TILE;
     int direita = (int)(x + raio) / TILE;
 
-    if (is_parede(cima, esquerda)){
+    if (is_parede(cima, esquerda))
+    {
         return 1;
     }
-    if (is_parede(cima, direita)){
+    if (is_parede(cima, direita))
+    {
         return 1;
     }
-    if (is_parede(baixo, esquerda)){
+    if (is_parede(baixo, esquerda))
+    {
         return 1;
     }
-    if (is_parede(baixo, direita)){
+    if (is_parede(baixo, direita))
+    {
         return 1;
     }
 

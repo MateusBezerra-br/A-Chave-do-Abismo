@@ -130,32 +130,39 @@ void descarregar_mapa()
 static Texture2D get_texture(int id)
 {
 
-        if (id == ID_PAREDE){
-                
+        if (id == ID_PAREDE)
+        {
+
                 return ts_dungeon;
         }
-        if (id == ID_CHAO_CENTRO){
-                
+        if (id == ID_CHAO_CENTRO)
+        {
+
                 return ts_dungeon;
         }
-        if (id == ID_BAU){
-                
+        if (id == ID_BAU)
+        {
+
                 return ts_bau;
         }
-        if (id == ID_PAPEIS){
-                
+        if (id == ID_PAPEIS)
+        {
+
                 return ts_papeis;
         }
-        if (id == ID_PORTA_BAIXO){
-                
+        if (id == ID_PORTA_BAIXO)
+        {
+
                 return ts_dungeon;
         }
-        if (id == ID_PORTA_CIMA){
-                
+        if (id == ID_PORTA_CIMA)
+        {
+
                 return ts_dungeon;
         }
-        if (id == ID_CHAO){
-                
+        if (id == ID_CHAO)
+        {
+
                 return ts_chao;
         }
 }
@@ -163,31 +170,38 @@ static Texture2D get_texture(int id)
 static Rectangle get_origem(int id)
 {
 
-        if (id == ID_PAREDE){
+        if (id == ID_PAREDE)
+        {
 
                 return (Rectangle){96, 208, TILE, TILE};
         }
-        if (id == ID_CHAO_CENTRO){
+        if (id == ID_CHAO_CENTRO)
+        {
 
                 return (Rectangle){64, 64, TILE, TILE};
         }
-        if (id == ID_BAU){
+        if (id == ID_BAU)
+        {
 
                 return (Rectangle){32, 0, TILE, TILE};
         }
-        if (id == ID_PAPEIS){
+        if (id == ID_PAPEIS)
+        {
 
                 return (Rectangle){192, 160, TILE, TILE};
         }
-        if (id == ID_PORTA_BAIXO){
+        if (id == ID_PORTA_BAIXO)
+        {
 
                 return (Rectangle){160, 112, TILE, TILE};
         }
-        if (id == ID_PORTA_CIMA){
+        if (id == ID_PORTA_CIMA)
+        {
 
                 return (Rectangle){160, 96, TILE, TILE};
         }
-        if (id == ID_CHAO){
+        if (id == ID_CHAO)
+        {
 
                 return (Rectangle){128, 16, TILE, TILE};
         }

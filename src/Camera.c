@@ -1,6 +1,7 @@
 #include "Camera.h"
 
-void InitCamera(Camera2D *camera, Player *player) {
+void InitCamera(Camera2D *camera, Player *player)
+{
 
     camera->target = (Vector2){player->x, player->y};
 
@@ -11,7 +12,8 @@ void InitCamera(Camera2D *camera, Player *player) {
     camera->zoom = 9.f;
 }
 
-void AtualizarCamera(Camera2D *camera, Player *player) {
+void AtualizarCamera(Camera2D *camera, Player *player)
+{
 
     camera->target = (Vector2){player->x, player->y};
 }

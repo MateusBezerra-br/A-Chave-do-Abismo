@@ -59,7 +59,8 @@ void RunMenu(void)
 
         EndDrawing();
 
-        if (IsKeyPressed(KEY_ENTER)){
+        if (IsKeyPressed(KEY_ENTER))
+        {
             break;
         }
     }

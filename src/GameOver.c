@@ -6,8 +6,7 @@
 
 extern Font fonte_texto;
 
-
-void GameOver(Player *player,int spawn_chave)
+void GameOver(Player *player, int spawn_chave)
 {
 
     if (player->vidas == 0)
@@ -25,7 +24,6 @@ void GameOver(Player *player,int spawn_chave)
 
             player->vidas = 4;
             spawn_chave = 0;
-        
 
             for (i = 0; i < 4; i++)
             {
@@ -35,7 +33,6 @@ void GameOver(Player *player,int spawn_chave)
             InitPlayer(player);
             InitPapeis();
             InitBau();
-           
         }
     }
 }
