@@ -26,7 +26,7 @@ int todos_coletados()
         if (papeis[i].coletado == 1)
         {
 
-            return 1;
+            return 0;
         }
     }
 
@@ -61,7 +61,7 @@ int main(void)
     InitNpc();
 
     
-    InitChave(chave_aparece );
+    InitChave(chave_aparece);
     
     
     
@@ -151,13 +151,9 @@ int main(void)
         DrawPorta();
         Drawpapeis();
         DrawNpcs();
-
-     
         DrawChave(chave_aparece );
        
         
-        
-
         EndMode2D();
 
         for (int i = 0; i < 4; i++)
@@ -177,20 +173,21 @@ int main(void)
             DrawTextEx(fonte_texto, "Voce precisa da chave para sair daqui!", (Vector2){70, 865}, 24, 1, (Color){180, 106, 79, 255});
         }
 
-        if (Proximo_ao_Bau(player.x, player.y) && !todos_coletados())
+        if (Proximo_ao_Bau(player.x, player.y) && !todos_coletados() )
         {
             DrawRectangle(50, 850, 1200, 60, (Color){0, 0, 0, 200});
             DrawTextEx(fonte_texto, "Encontre os 4 fragmentos para responder a charada!", (Vector2){70, 865}, 24, 1, WHITE);
         }
 
-        if (Proximo_ao_Bau(player.x, player.y) && todos_coletados() &&  !chave_aparece)
+        if (Proximo_ao_Bau(player.x, player.y) && todos_coletados() &&  !chave_aparece && errado == 0)
         {
             DrawRectangle(50, 850, 1200, 60, (Color){0, 0, 0, 200});
             DrawTextEx(fonte_texto, "[ E ] Responder a charada do bau", (Vector2){70, 865}, 24, 1, GOLD);
         }
 
+       
         Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &chave_aparece);
-
+        
         if (!venceu)
         {
             time_gameplay = GetTime() - time_inicial;

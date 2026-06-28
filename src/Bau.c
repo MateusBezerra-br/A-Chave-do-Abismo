@@ -53,7 +53,7 @@ int Proximo_ao_Bau(float px, float py)
     return CheckCollisionPointRec((Vector2){px, py}, area);
 };
 
-void desenhar_tela_charada(int *vidas, int *tem_chave)
+void desenhar_tela_charada(int *vidas, int *chave_aparece)
 {
 
     DrawRectangle(0, 0, 1500, 1000, (Color){0, 0, 0, 180});
@@ -105,10 +105,10 @@ void desenhar_tela_charada(int *vidas, int *tem_chave)
     {
         if (opcao_selecionada == 0)
         {
-            *tem_chave = 1;
+            *chave_aparece = 1;
             mostrando_charada = 0;
             acertou = 1;
-            tempo_acerto = 2.4f;
+            tempo_acerto = 6.f;
         }
         else if (opcao_selecionada != 0)
         {
@@ -128,13 +128,13 @@ void desenhar_tela_charada(int *vidas, int *tem_chave)
     }
 }
 
-void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostra_chave)
+void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostrar_chave)
 {
     if (acertou)
     {
         tempo_acerto -= GetFrameTime();
-        DrawRectangle(300, 850, 700, 80, (Color){0, 0, 0, 220});
-        DrawTextEx(fonte_texto, "VOCE ACERTOU! Pegue a chave!", (Vector2){320, 870}, 24, 1, WHITE);
+        DrawRectangle(300, 850, 900, 80, (Color){0, 0, 0, 220});
+        DrawTextEx(fonte_texto, "Você acertou!. Mas não espere que ela venha ate você...\nencontre-a em algum lugar deste labirinto ", (Vector2){320, 870}, 24, 1, WHITE);
 
         if (tempo_acerto <= 0){
             acertou = 0;
@@ -158,10 +158,13 @@ void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int
     {
         if (fragmentos_coletados < 4)
         {
-
             return;
         }
 
+        if(*mostrar_chave){
+            return;
+        }
+      
         if (IsKeyPressed(KEY_E))
         {
             mostrando_charada = 1;
@@ -170,6 +173,6 @@ void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int
 
     if (mostrando_charada)
     {
-        desenhar_tela_charada(vidas, mostra_chave);
+        desenhar_tela_charada(vidas, mostrar_chave);
     }
 };
