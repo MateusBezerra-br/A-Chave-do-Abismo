@@ -110,7 +110,7 @@ void InitNpc()
     }
 };
 
-void UpdateNpcs(float playerX, float playerY, int *vidas)
+void UpdateNpcs(float playerX, float playerY, int *vidas, Sound dano)
 {
 
     for (j = 0; j < 21; j++)
@@ -397,7 +397,7 @@ void UpdateNpcs(float playerX, float playerY, int *vidas)
 
             if (npcs[j].distancia <= 3.5)
             {
-
+                PlaySound(dano);
                 *vidas -= 1;
             }
             if (npcs[j].tempoRespawn <= 0)
@@ -435,6 +435,5 @@ void DrawNpcs()
 
 void DescarregarNpcs()
 {
-
     UnloadTexture(textura_npcs);
 };

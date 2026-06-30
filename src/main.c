@@ -36,9 +36,8 @@ Font fonte_texto;
 int main(void)
 {
 
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-
     InitWindow(1500, 1000, "A Chave do Abismo");
+    InitAudioDevice();
     SetExitKey(KEY_DOWN);
     SetTargetFPS(60);
 
@@ -46,16 +45,13 @@ int main(void)
 
     Player player;
     InitPlayer(&player);
-
     InitBau();
-
-    int chave_aparece = 0;
-
-    int venceu = 0;
-
     InitPorta();
     InitPapeis();
     InitNpc();
+
+    int chave_aparece = 0;
+    int venceu = 0;
 
     InitChave(chave_aparece);
 
@@ -92,22 +88,35 @@ int main(void)
     balls[6].checkX = 1508;
     balls[6].checkY = 1400;
 
+    RunMenu();
+
     extern int errado;
     double time_inicial = GetTime();
-    int vitoria = 0;
+    int vitoria = 0, vitoria_tocou = 0;
     char nome[25];
     int tam = 0;
 
     double time_gameplay = GetTime() - time_inicial;
-
-    RunMenu();
+    Music musica_fundo = LoadMusicStream("assets/musica_fundo1.mp3");
+    PlayMusicStream(musica_fundo);
+    Sound som_perdeu = LoadSound("assets/game_over.mp3");
+    Sound dano = LoadSound("assets/dano.mp3");
+    Sound coleta_papel = LoadSound("assets/coleta.mp3");
+    Sound coleta_chave = LoadSound("assets/chave.mp3");
+    Sound resposta_certa = LoadSound("assets/correta.mp3");
+    Sound som_vitoria = LoadSound("assets/vitoria.wav");
 
     while (!WindowShouldClose())
     {
+        UpdateMusicStream(musica_fundo);
+        if (!IsMusicStreamPlaying(musica_fundo))
+        {
+            PlayMusicStream(musica_fundo);
+        }
 
         for (int i = 0; i < 7; i++)
         {
-            UpdateBall(&balls[i], &player.vidas, player.x, player.y, &player);
+            UpdateBall(&balls[i], &player.vidas, player.x, player.y, &player, dano);
         }
 
         AtualizarCamera(&camera, &player);
@@ -115,9 +124,9 @@ int main(void)
         if (!esta_na_charada())
             UpdatePlayer(&player);
 
-        Verificar_papel(player.x, player.y);
-        Verificar_Chave(player.x, player.y, chave_aparece);
-        UpdateNpcs(player.x, player.y, &player.vidas);
+        Verificar_papel(player.x, player.y, coleta_papel);
+        Verificar_Chave(player.x, player.y, chave_aparece, coleta_chave);
+        UpdateNpcs(player.x, player.y, &player.vidas, dano);
 
         BeginDrawing();
 
@@ -172,7 +181,7 @@ int main(void)
             DrawTextEx(fonte_texto, "[ E ] Responder a charada do bau", (Vector2){70, 865}, 24, 1, GOLD);
         }
 
-        Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &chave_aparece);
+        Interacao_Bau(player.x, player.y, todos_coletados() ? 4 : 0, &player.vidas, &chave_aparece, dano, resposta_certa);
 
         if (!venceu)
         {
@@ -181,6 +190,14 @@ int main(void)
 
         if (venceu)
         {
+
+            StopMusicStream(musica_fundo);
+
+            if (vitoria_tocou == 0)
+            {
+                PlaySound(som_vitoria);
+                vitoria_tocou = 1;
+            }
 
             DrawTexturePro(
                 Tela_vitoria,
@@ -251,23 +268,31 @@ int main(void)
         if (player.vidas <= 0)
         {
 
-            GameOver(&player, chave_aparece);
+            StopMusicStream(musica_fundo);
+
+            GameOver(&player, &chave_aparece, som_perdeu);
 
             if (IsKeyPressed(KEY_ENTER))
             {
+                SeekMusicStream(musica_fundo, 0.0f);
+                PlayMusicStream(musica_fundo);
                 time_inicial = GetTime();
                 time_gameplay = 0;
                 chave_aparece = 0;
             }
         }
 
-        DrawText(TextFormat("X: %.0f", player.x), 10, 935, 20, WHITE);
-        DrawText(TextFormat("Y: %.0f", player.y), 10, 955, 20, WHITE);
-        DrawText(TextFormat("tempo: %.2lf", time_gameplay), 10, 975, 20, WHITE);
+              DrawText(TextFormat("tempo: %.2lf", time_gameplay), 10, 975, 20, WHITE);
 
         EndDrawing();
     }
 
+    UnloadMusicStream(musica_fundo);
+    UnloadSound(resposta_certa);
+    UnloadSound(som_vitoria);
+    UnloadSound(coleta_papel);
+    UnloadSound(dano);
+    UnloadSound(som_perdeu);
     UnloadFont(fonte_texto);
     DescarregarChave();
     DescarregarNpcs();
@@ -275,6 +300,7 @@ int main(void)
     DescarregarPorta();
     DescarregarBau();
     descarregar_mapa();
+    CloseAudioDevice();
     CloseWindow();
 
     return 0;

@@ -17,9 +17,10 @@ void InitChave(int chave_aparece );
 
 void DrawChave(int chave_aparece );
 
+
 void DescarregarChave();
 
-void Verificar_Chave(float x, float y, int chave_aparece  );
+void Verificar_Chave(float x, float y, int chave_aparece, Sound coleta);
 
 
 

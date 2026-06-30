@@ -61,7 +61,7 @@ void UpdatePlayer(Player *p)
     float novo_y = p->y;
     float static antigo_x;
     float static antigo_y;
-    float barreira_x = 769, barreira_y = 740; // barreira da porta
+    float barreira_x = 769, barreira_y = 740;
 
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
     {

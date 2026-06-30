@@ -3,6 +3,6 @@
 #include "Player.h"
 #include "Chave.h"
 
-void GameOver(Player *player, int spawn_chave);
+void GameOver(Player *player, int *spawn_chave, Sound som);
 
 #endif 

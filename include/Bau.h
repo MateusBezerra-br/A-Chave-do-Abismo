@@ -17,7 +17,7 @@ void DrawBau( );
 
 void InitBau( );
 
-void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostrar_chave );
+void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostrar_chave, Sound dano, Sound correta);
 
 int Proximo_ao_Bau(float px, float py );
 

@@ -15,7 +15,7 @@ typedef struct Ball
 
 void InitBall(Ball *ball, float x, float y, float speedX, float speedY);
 
-void UpdateBall(Ball *ball, int *vidas,float PlayerX, float PlayerY, Player *player);
+void UpdateBall(Ball *ball, int *vidas,float PlayerX, float PlayerY, Player *player, Sound dano);
 
 void DrawBall(Ball *ball);
 

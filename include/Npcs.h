@@ -1,6 +1,6 @@
 #ifndef NPCS_H
 #define NPCS_H
-
+#include "raylib.h"
 typedef struct {
 
     float x;
@@ -31,7 +31,7 @@ extern Npc npcs[23];
 #define RESPAWN 3
 
 void InitNpc();
-void UpdateNpcs(float playerX, float playerY, int *vidas);
+void UpdateNpcs(float playerX, float playerY, int *vidas, Sound dano);
 void DrawNpcs();
 void DescarregarNpcs();
 

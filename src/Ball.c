@@ -14,7 +14,7 @@ void InitBall(Ball *ball, float x, float y, float speedX, float speedY)
     ball->color = RED;
 }
 
-void UpdateBall(Ball *ball, int *vidas, float PlayerX, float PlayerY, Player *player)
+void UpdateBall(Ball *ball, int *vidas, float PlayerX, float PlayerY, Player *player, Sound dano)
 {
 
     float dt = GetFrameTime();
@@ -29,6 +29,7 @@ void UpdateBall(Ball *ball, int *vidas, float PlayerX, float PlayerY, Player *pl
 
     if (distancia <= ball->radius + 4)
     {
+        PlaySound(dano);
         *vidas -= 1;
         player->x = ball->checkX;
         player->y = ball->checkY;

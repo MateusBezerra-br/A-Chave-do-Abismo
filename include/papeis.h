@@ -17,7 +17,7 @@ void InitPapeis();
 
 void Drawpapeis();
 
-void Verificar_papel(float px, float py);
+void Verificar_papel(float px, float py, Sound coleta);
 
 
 void DescarregarPapel();

@@ -2,11 +2,14 @@
 #include "Ver_Ranking.h"
 
 int estado = 0;
+static int iniciar = 0;
 
 void RunMenu(void)
 {
     Texture2D menu = LoadTexture("assets/menu.png");
     Texture2D Tela_ranking = LoadTexture("assets/tela_ranking.png");
+    Sound click_menu = LoadSound("assets/click_menu.mp3");
+    Sound click_start = LoadSound("assets/start.mp3");
 
     while (!WindowShouldClose())
     {
@@ -37,6 +40,7 @@ void RunMenu(void)
 
         if (IsKeyPressed(KEY_THREE))
         {
+            PlaySound(click_menu);
             estado = 1;
         }
         if (estado == 1)
@@ -54,6 +58,7 @@ void RunMenu(void)
         }
         if (IsKeyPressed(KEY_ESCAPE))
         {
+            PlaySound(click_menu);
             estado = 0;
         }
 
@@ -61,9 +66,16 @@ void RunMenu(void)
 
         if (IsKeyPressed(KEY_ENTER))
         {
+            PlaySound(click_start);
+            iniciar = 1;
+        }
+
+        if (iniciar && !IsSoundPlaying(click_start))
+        {
             break;
         }
     }
     UnloadTexture(Tela_ranking);
     UnloadTexture(menu);
+    UnloadSound(click_menu);
 }

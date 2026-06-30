@@ -53,7 +53,7 @@ int Proximo_ao_Bau(float px, float py)
     return CheckCollisionPointRec((Vector2){px, py}, area);
 };
 
-void desenhar_tela_charada(int *vidas, int *chave_aparece)
+void desenhar_tela_charada(int *vidas, int *chave_aparece, Sound dano, Sound correta)
 {
 
     DrawRectangle(0, 0, 1500, 1000, (Color){0, 0, 0, 180});
@@ -105,6 +105,8 @@ void desenhar_tela_charada(int *vidas, int *chave_aparece)
     {
         if (opcao_selecionada == 0)
         {
+            PlaySound(correta);
+
             *chave_aparece = 1;
             mostrando_charada = 0;
             acertou = 1;
@@ -112,7 +114,7 @@ void desenhar_tela_charada(int *vidas, int *chave_aparece)
         }
         else if (opcao_selecionada != 0)
         {
-
+            PlaySound(dano);
             *vidas -= 1;
             errado = 1;
             mostrando_charada = 0;
@@ -126,7 +128,7 @@ void desenhar_tela_charada(int *vidas, int *chave_aparece)
     }
 }
 
-void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostrar_chave)
+void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int *mostrar_chave, Sound dano, Sound correta)
 {
     if (acertou)
     {
@@ -171,6 +173,6 @@ void Interacao_Bau(float px, float py, int fragmentos_coletados, int *vidas, int
 
     if (mostrando_charada)
     {
-        desenhar_tela_charada(vidas, mostrar_chave);
+        desenhar_tela_charada(vidas, mostrar_chave, dano, correta);
     }
 };

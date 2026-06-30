@@ -49,7 +49,7 @@ static int colide_papel(float x, float y, float raio, float ox, float oy, float 
     return CheckCollisionCircleRec((Vector2){x, y}, raio, rect);
 }
 
-void Verificar_papel(float px, float py)
+void Verificar_papel(float px, float py, Sound coleta)
 {
     for (i = 0; i < 4; i++)
     {
@@ -57,6 +57,7 @@ void Verificar_papel(float px, float py)
         {
             if (colide_papel(px, py, 20, papeis[i].x, papeis[i].y - 16, 16, 16))
             {
+                PlaySound(coleta);
                 papeis[i].coletado = 0;
             }
         }
