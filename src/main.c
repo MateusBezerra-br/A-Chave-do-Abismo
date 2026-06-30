@@ -43,6 +43,11 @@ int main(void)
 
     carregar_mapa();
 
+    
+    Texture2D Tela_vitoria = LoadTexture("assets/tela_vitoria.png");
+    fonte_texto = LoadFontEx("assets/bedstead-bold.otf", 32, 0, 500);
+    SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
+
     Player player;
     InitPlayer(&player);
     InitBau();
@@ -54,10 +59,6 @@ int main(void)
     int venceu = 0;
 
     InitChave(chave_aparece);
-
-    Texture2D Tela_vitoria = LoadTexture("assets/tela_vitoria.png");
-    fonte_texto = LoadFontEx("assets/bedstead-bold.otf", 32, 0, 500);
-    SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
 
     Camera2D camera = {0};
 
@@ -105,6 +106,7 @@ int main(void)
     Sound coleta_chave = LoadSound("assets/chave.mp3");
     Sound resposta_certa = LoadSound("assets/correta.mp3");
     Sound som_vitoria = LoadSound("assets/vitoria.wav");
+
 
     while (!WindowShouldClose())
     {
@@ -282,7 +284,7 @@ int main(void)
             }
         }
 
-              DrawText(TextFormat("tempo: %.2lf", time_gameplay), 10, 975, 20, WHITE);
+        DrawText(TextFormat("tempo: %.2lf", time_gameplay), 10, 975, 20, WHITE);
 
         EndDrawing();
     }
