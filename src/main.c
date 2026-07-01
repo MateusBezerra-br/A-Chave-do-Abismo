@@ -41,27 +41,23 @@ int main(void)
     SetExitKey(KEY_DOWN);
     SetTargetFPS(60);
 
-    carregar_mapa();
-
     Texture2D Tela_vitoria = LoadTexture("assets/tela_vitoria.png");
     fonte_texto = LoadFontEx("assets/bedstead-bold.otf", 32, 0, 500);
     SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
 
+    carregar_mapa();
     Player player;
     InitPlayer(&player);
     InitBau();
     InitPorta();
     InitPapeis();
     InitNpc();
+    Camera2D camera = {0};
+    InitCamera(&camera, &player);
 
     int chave_aparece = 0;
     int venceu = 0;
-
     InitChave(chave_aparece);
-
-    Camera2D camera = {0};
-
-    InitCamera(&camera, &player);
 
     Ball balls[7];
 
@@ -95,8 +91,8 @@ int main(void)
     int vitoria = 0, vitoria_tocou = 0;
     char nome[25];
     int tam = 0;
-
     double time_gameplay = GetTime() - time_inicial;
+    
     Music musica_fundo = LoadMusicStream("assets/musica_fundo1.mp3");
     SetMusicVolume(musica_fundo, 0.7f);
     PlayMusicStream(musica_fundo);
