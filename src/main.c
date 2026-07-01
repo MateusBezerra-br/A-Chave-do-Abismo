@@ -43,7 +43,6 @@ int main(void)
 
     carregar_mapa();
 
-    
     Texture2D Tela_vitoria = LoadTexture("assets/tela_vitoria.png");
     fonte_texto = LoadFontEx("assets/bedstead-bold.otf", 32, 0, 500);
     SetTextureFilter(fonte_texto.texture, TEXTURE_FILTER_POINT);
@@ -66,13 +65,13 @@ int main(void)
 
     Ball balls[7];
 
-    InitBall(&balls[0], 156, 1481, 180, 0);
-    InitBall(&balls[1], 1540, 1160, 80, 100);
-    InitBall(&balls[2], 1187, 109, -210, 0);
-    InitBall(&balls[3], 131, 227, -110, -45);
-    InitBall(&balls[4], 1187, 109, 0, 210);
-    InitBall(&balls[5], 131, 227, 160, 0);
-    InitBall(&balls[6], 1520, 1160, -120, -130);
+    InitBall(&balls[0],156,1481,205,0);
+    InitBall(&balls[1],1540,1160,90,110);
+    InitBall(&balls[2],1187,109,-235,0);
+    InitBall(&balls[3],131,227, -120, -45);
+    InitBall(&balls[4],1187,109,0,235);
+    InitBall(&balls[5],131,227,180,0);
+    InitBall(&balls[6],1520,1160,-135,-145);
 
     balls[0].checkX = 135;
     balls[0].checkY = 1365;
@@ -99,6 +98,7 @@ int main(void)
 
     double time_gameplay = GetTime() - time_inicial;
     Music musica_fundo = LoadMusicStream("assets/musica_fundo1.mp3");
+    SetMusicVolume(musica_fundo, 0.7f);
     PlayMusicStream(musica_fundo);
     Sound som_perdeu = LoadSound("assets/game_over.mp3");
     Sound dano = LoadSound("assets/dano.mp3");
@@ -106,7 +106,6 @@ int main(void)
     Sound coleta_chave = LoadSound("assets/chave.mp3");
     Sound resposta_certa = LoadSound("assets/correta.mp3");
     Sound som_vitoria = LoadSound("assets/vitoria.wav");
-
 
     while (!WindowShouldClose())
     {

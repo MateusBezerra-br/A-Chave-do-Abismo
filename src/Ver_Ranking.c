@@ -62,7 +62,7 @@ void Ranking_leitura()
 
         DrawTextEx(fonte_texto,
                    TextFormat("%.2lfs", players[i].seu_tempo),
-                   (Vector2){920, 316 + 47 * i},
+                   (Vector2){880, 316 + 47 * i},
                    32, 3.2, BROWN);
 
         DrawTextEx(fonte_texto,

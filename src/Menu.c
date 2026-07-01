@@ -64,7 +64,7 @@ void RunMenu(void)
 
         EndDrawing();
 
-        if (IsKeyPressed(KEY_ENTER))
+        if (IsKeyPressed(KEY_ENTER) && estado != 1)
         {
             PlaySound(click_start);
             iniciar = 1;
